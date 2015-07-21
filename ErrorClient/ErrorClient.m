@@ -1,6 +1,4 @@
 #import "ErrorClient.h"
-#import "CodeCoordinate.h"
-#import "ErrorEntity.h"
 
 #import "Optional.h"
 #import "Tools.h"

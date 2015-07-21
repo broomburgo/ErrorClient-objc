@@ -1,9 +1,9 @@
 #import <Foundation/Foundation.h>
 
-extern NSString* const k_errorServerURLStringUserDefaultsKey;
+#import "CodeCoordinate.h"
+#import "ErrorEntity.h"
 
-@class CodeCoordinate;
-@class ErrorEntity;
+extern NSString* const k_errorServerURLStringUserDefaultsKey;
 
 @interface ErrorClient : NSObject
 
