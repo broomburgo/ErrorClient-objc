@@ -2,11 +2,6 @@
 #import "Optional.h"
 #import "Tools.h"
 
-NSString* const errorTag_assicurazioni = @"assicurazioni";
-NSString* const errorTag_poller = @"poller";
-NSString* const errorTag_recuperoQuotazioni = @"recupero_quotazioni";
-NSString* const errorTag_recuperoSalvataggio = @"recupero_salvataggio";
-
 NSString* const k_standardTagsStringSeparator = @"|";
 
 @interface ErrorEntity ()

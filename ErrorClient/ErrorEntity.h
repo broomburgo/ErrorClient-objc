@@ -1,10 +1,5 @@
 #import <Foundation/Foundation.h>
 
-extern NSString* __nonnull const errorTag_assicurazioni;
-extern NSString* __nonnull const errorTag_poller;
-extern NSString* __nonnull const errorTag_recuperoQuotazioni;
-extern NSString* __nonnull const errorTag_recuperoSalvataggio;
-
 extern NSString* __nonnull const k_standardTagsStringSeparator;
 
 @interface ErrorEntity : NSObject
