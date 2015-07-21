@@ -9,5 +9,7 @@
 
 + (CodeCoordinate*)coordinateWithMethod:(const char *)method file:(const char *)file line:(NSInteger)line;
 
+#define kCodeCoordinateHere [CodeCoordinate coordinateWithMethod:__FUNCTION__ file:__FILE__ line:__LINE__]
+
 @end
 

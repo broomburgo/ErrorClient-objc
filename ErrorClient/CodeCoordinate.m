@@ -26,4 +26,8 @@
     return self.file_ ? self.file_.UTF8String : NULL;
 }
 
+- (NSString*)description {
+    return [NSString stringWithFormat:@"%@ | %@ | line %d", self.file_.lastPathComponent, self.method_, (int)self.line];
+}
+
 @end
