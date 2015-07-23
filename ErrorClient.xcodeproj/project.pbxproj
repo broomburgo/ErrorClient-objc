@@ -10,7 +10,7 @@
 		3805032B1B60D0A30062DE76 /* libOptional.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3805031F1B60D0850062DE76 /* libOptional.a */; };
 		3805032C1B60D0A60062DE76 /* libTools.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 380503281B60D0890062DE76 /* libTools.a */; };
 		38EA10831B5E33A0004EE76E /* libErrorClient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 38EA10771B5E33A0004EE76E /* libErrorClient.a */; };
-		38EA10971B5E33D9004EE76E /* ErrorEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EA10921B5E33D9004EE76E /* ErrorEntity.m */; };
+		38EA10971B5E33D9004EE76E /* MessageEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EA10921B5E33D9004EE76E /* MessageEntity.m */; };
 		38EA10981B5E33D9004EE76E /* ErrorClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EA10941B5E33D9004EE76E /* ErrorClient.m */; };
 		38EA10991B5E33D9004EE76E /* CodeCoordinate.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EA10961B5E33D9004EE76E /* CodeCoordinate.m */; };
 		38EA10C31B5E374F004EE76E /* RavenClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EA10C01B5E374F004EE76E /* RavenClient.m */; };
@@ -73,8 +73,8 @@
 		38EA10771B5E33A0004EE76E /* libErrorClient.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libErrorClient.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		38EA10821B5E33A0004EE76E /* ErrorClientTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ErrorClientTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		38EA10881B5E33A0004EE76E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		38EA10911B5E33D9004EE76E /* ErrorEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ErrorEntity.h; sourceTree = "<group>"; };
-		38EA10921B5E33D9004EE76E /* ErrorEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ErrorEntity.m; sourceTree = "<group>"; };
+		38EA10911B5E33D9004EE76E /* MessageEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageEntity.h; sourceTree = "<group>"; };
+		38EA10921B5E33D9004EE76E /* MessageEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageEntity.m; sourceTree = "<group>"; };
 		38EA10931B5E33D9004EE76E /* ErrorClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ErrorClient.h; sourceTree = "<group>"; };
 		38EA10941B5E33D9004EE76E /* ErrorClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ErrorClient.m; sourceTree = "<group>"; };
 		38EA10951B5E33D9004EE76E /* CodeCoordinate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodeCoordinate.h; sourceTree = "<group>"; };
@@ -152,8 +152,8 @@
 				38EA10961B5E33D9004EE76E /* CodeCoordinate.m */,
 				38EA10931B5E33D9004EE76E /* ErrorClient.h */,
 				38EA10941B5E33D9004EE76E /* ErrorClient.m */,
-				38EA10911B5E33D9004EE76E /* ErrorEntity.h */,
-				38EA10921B5E33D9004EE76E /* ErrorEntity.m */,
+				38EA10911B5E33D9004EE76E /* MessageEntity.h */,
+				38EA10921B5E33D9004EE76E /* MessageEntity.m */,
 			);
 			path = ErrorClient;
 			sourceTree = "<group>";
@@ -343,7 +343,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				38EA10991B5E33D9004EE76E /* CodeCoordinate.m in Sources */,
-				38EA10971B5E33D9004EE76E /* ErrorEntity.m in Sources */,
+				38EA10971B5E33D9004EE76E /* MessageEntity.m in Sources */,
 				38EA10981B5E33D9004EE76E /* ErrorClient.m in Sources */,
 				38EA10C31B5E374F004EE76E /* RavenClient.m in Sources */,
 				38EA10C41B5E374F004EE76E /* RavenConfig.m in Sources */,

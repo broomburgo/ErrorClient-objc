@@ -73,51 +73,54 @@ NSString* const k_errorServerURLStringUserDefaultsKey = @"k_errorServerURLString
     }
 }
 
-+ (void)sendInfo:(NSString *)info {
++ (void)sendInfo:(MessageEntity *)info {
     [self inCoordinate:nil sendInfo:info];
 }
 
-+ (void)inCoordinate:(CodeCoordinate*)coordinate sendInfo:(NSString*)info {
++ (void)inCoordinate:(CodeCoordinate*)coordinate sendInfo:(MessageEntity*)info {
     RavenClient* ravenClient = [RavenClient sharedClient];
     if (ravenClient != nil) {
-        [ravenClient captureMessage:info
+        [ravenClient captureMessage:info.text
                               level:kRavenLogLevelDebugInfo
                     additionalExtra:nil
-                     additionalTags:nil
+                     additionalTags:[@{}
+                                     key:@"custom_tags" optional:info.standardTagsString]
                              method:coordinate ? coordinate.method : NULL
                                file:coordinate ? coordinate.file : NULL
                                line:coordinate ? coordinate.line : 0];
     }
 }
 
-+ (void)sendWarning:(NSString *)warning {
++ (void)sendWarning:(MessageEntity *)warning {
     [self inCoordinate:nil sendWarning:warning];
 }
 
-+ (void)inCoordinate:(CodeCoordinate*)coordinate sendWarning:(NSString*)warning {
++ (void)inCoordinate:(CodeCoordinate*)coordinate sendWarning:(MessageEntity*)warning {
     RavenClient* ravenClient = [RavenClient sharedClient];
     if (ravenClient != nil) {
-        [ravenClient captureMessage:warning
+        [ravenClient captureMessage:warning.text
                               level:kRavenLogLevelDebugWarning
                     additionalExtra:nil
-                     additionalTags:nil
+                     additionalTags:[@{}
+                                     key:@"custom_tags" optional:warning.standardTagsString]
                              method:coordinate ? coordinate.method : NULL
                                file:coordinate ? coordinate.file : NULL
                                line:coordinate ? coordinate.line : 0];
     }
 }
 
-+ (void)sendError:(ErrorEntity *)error {
++ (void)sendError:(MessageEntity *)error {
     [self inCoordinate:nil sendError:error];
 }
 
-+ (void)inCoordinate:(CodeCoordinate*)coordinate sendError:(ErrorEntity *)error {
++ (void)inCoordinate:(CodeCoordinate*)coordinate sendError:(MessageEntity *)error {
     RavenClient* ravenClient = [RavenClient sharedClient];
     if (ravenClient != nil) {
         [ravenClient captureMessage:error.text
                               level:kRavenLogLevelDebugError
                     additionalExtra:nil
-                     additionalTags:@{ @"custom_tags": error.standardTagsString }
+                     additionalTags:[@{}
+                                     key:@"custom_tags" optional:error.standardTagsString]
                              method:coordinate ? coordinate.method : NULL
                                file:coordinate ? coordinate.file : NULL
                                line:coordinate ? coordinate.line : 0];
