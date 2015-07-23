@@ -9,10 +9,10 @@ extern NSString* const k_errorServerURLStringUserDefaultsKey;
 
 + (void)setupExceptionHandler;
 + (void)sendInfo:(NSString*)info;
-+ (void)sendInfo:(NSString*)info coordinate:(CodeCoordinate*)coordinate;
++ (void)inCoordinate:(CodeCoordinate*)coordinate sendInfo:(NSString*)info;
 + (void)sendWarning:(NSString*)warning;
-+ (void)sendWarning:(NSString*)warning coordinate:(CodeCoordinate*)coordinate;
++ (void)inCoordinate:(CodeCoordinate*)coordinate sendWarning:(NSString*)warning;
 + (void)sendError:(ErrorEntity*)error;
-+ (void)sendError:(ErrorEntity*)error coordinate:(CodeCoordinate*)coordinate;
++ (void)inCoordinate:(CodeCoordinate*)coordinate sendError:(ErrorEntity*)error;
 
 @end

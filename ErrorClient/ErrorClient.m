@@ -74,10 +74,10 @@ NSString* const k_errorServerURLStringUserDefaultsKey = @"k_errorServerURLString
 }
 
 + (void)sendInfo:(NSString *)info {
-    [self sendInfo:info coordinate:nil];
+    [self inCoordinate:nil sendInfo:info];
 }
 
-+ (void)sendInfo:(NSString*)info coordinate:(CodeCoordinate*)coordinate {
++ (void)inCoordinate:(CodeCoordinate*)coordinate sendInfo:(NSString*)info {
     RavenClient* ravenClient = [RavenClient sharedClient];
     if (ravenClient != nil) {
         [ravenClient captureMessage:info
@@ -91,10 +91,10 @@ NSString* const k_errorServerURLStringUserDefaultsKey = @"k_errorServerURLString
 }
 
 + (void)sendWarning:(NSString *)warning {
-    [self sendWarning:warning coordinate:nil];
+    [self inCoordinate:nil sendWarning:warning];
 }
 
-+ (void)sendWarning:(NSString*)warning coordinate:(CodeCoordinate*)coordinate {
++ (void)inCoordinate:(CodeCoordinate*)coordinate sendWarning:(NSString*)warning {
     RavenClient* ravenClient = [RavenClient sharedClient];
     if (ravenClient != nil) {
         [ravenClient captureMessage:warning
@@ -108,10 +108,10 @@ NSString* const k_errorServerURLStringUserDefaultsKey = @"k_errorServerURLString
 }
 
 + (void)sendError:(ErrorEntity *)error {
-    [self sendError:error coordinate:nil];
+    [self inCoordinate:nil sendError:error];
 }
 
-+ (void)sendError:(ErrorEntity *)error coordinate:(CodeCoordinate*)coordinate {
++ (void)inCoordinate:(CodeCoordinate*)coordinate sendError:(ErrorEntity *)error {
     RavenClient* ravenClient = [RavenClient sharedClient];
     if (ravenClient != nil) {
         [ravenClient captureMessage:error.text
