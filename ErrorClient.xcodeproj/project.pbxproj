@@ -7,23 +7,45 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3805032B1B60D0A30062DE76 /* libOptional.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3805031F1B60D0850062DE76 /* libOptional.a */; };
+		3805032C1B60D0A60062DE76 /* libTools.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 380503281B60D0890062DE76 /* libTools.a */; };
 		38EA10831B5E33A0004EE76E /* libErrorClient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 38EA10771B5E33A0004EE76E /* libErrorClient.a */; };
 		38EA10971B5E33D9004EE76E /* ErrorEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EA10921B5E33D9004EE76E /* ErrorEntity.m */; };
 		38EA10981B5E33D9004EE76E /* ErrorClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EA10941B5E33D9004EE76E /* ErrorClient.m */; };
 		38EA10991B5E33D9004EE76E /* CodeCoordinate.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EA10961B5E33D9004EE76E /* CodeCoordinate.m */; };
 		38EA10C31B5E374F004EE76E /* RavenClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EA10C01B5E374F004EE76E /* RavenClient.m */; };
 		38EA10C41B5E374F004EE76E /* RavenConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EA10C21B5E374F004EE76E /* RavenConfig.m */; };
-		38EA10CE1B5E3983004EE76E /* Optional.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EA10CD1B5E3983004EE76E /* Optional.m */; };
-		38EA10DD1B5E3993004EE76E /* NSArray+Build.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EA10D01B5E3993004EE76E /* NSArray+Build.m */; };
-		38EA10DE1B5E3993004EE76E /* NSArray+MapReduce.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EA10D21B5E3993004EE76E /* NSArray+MapReduce.m */; };
-		38EA10DF1B5E3993004EE76E /* NSDictionary+Map.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EA10D41B5E3993004EE76E /* NSDictionary+Map.m */; };
-		38EA10E01B5E3993004EE76E /* NSDictionary+Optionals.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EA10D61B5E3993004EE76E /* NSDictionary+Optionals.m */; };
-		38EA10E11B5E3993004EE76E /* NSDictionary+RequestClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EA10D81B5E3993004EE76E /* NSDictionary+RequestClass.m */; };
-		38EA10E21B5E3993004EE76E /* NSObject+Maybe.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EA10DA1B5E3993004EE76E /* NSObject+Maybe.m */; };
-		38EA10E31B5E3993004EE76E /* Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EA10DC1B5E3993004EE76E /* Tools.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		3805031E1B60D0850062DE76 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 380503191B60D0850062DE76 /* Optional.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 38F7F0571B4BC194008FE800;
+			remoteInfo = Optional;
+		};
+		380503201B60D0850062DE76 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 380503191B60D0850062DE76 /* Optional.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 38F7F0621B4BC194008FE800;
+			remoteInfo = OptionalTests;
+		};
+		380503271B60D0890062DE76 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 380503221B60D0890062DE76 /* Tools.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 38EA10381B5E1DAD004EE76E;
+			remoteInfo = Tools;
+		};
+		380503291B60D0890062DE76 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 380503221B60D0890062DE76 /* Tools.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 38EA10431B5E1DAD004EE76E;
+			remoteInfo = ToolsTests;
+		};
 		38EA10841B5E33A0004EE76E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 38EA106F1B5E33A0004EE76E /* Project object */;
@@ -46,6 +68,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		380503191B60D0850062DE76 /* Optional.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Optional.xcodeproj; path = Optional/Optional.xcodeproj; sourceTree = "<group>"; };
+		380503221B60D0890062DE76 /* Tools.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Tools.xcodeproj; path = Tools/Tools.xcodeproj; sourceTree = "<group>"; };
 		38EA10771B5E33A0004EE76E /* libErrorClient.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libErrorClient.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		38EA10821B5E33A0004EE76E /* ErrorClientTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ErrorClientTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		38EA10881B5E33A0004EE76E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -61,23 +85,6 @@
 		38EA10C01B5E374F004EE76E /* RavenClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RavenClient.m; path = Raven/Raven/RavenClient.m; sourceTree = "<group>"; };
 		38EA10C11B5E374F004EE76E /* RavenConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RavenConfig.h; path = Raven/Raven/RavenConfig.h; sourceTree = "<group>"; };
 		38EA10C21B5E374F004EE76E /* RavenConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RavenConfig.m; path = Raven/Raven/RavenConfig.m; sourceTree = "<group>"; };
-		38EA10CB1B5E3983004EE76E /* Optional_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Optional_Internal.h; path = Optional/Optional/Optional_Internal.h; sourceTree = "<group>"; };
-		38EA10CC1B5E3983004EE76E /* Optional.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Optional.h; path = Optional/Optional/Optional.h; sourceTree = "<group>"; };
-		38EA10CD1B5E3983004EE76E /* Optional.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Optional.m; path = Optional/Optional/Optional.m; sourceTree = "<group>"; };
-		38EA10CF1B5E3993004EE76E /* NSArray+Build.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSArray+Build.h"; path = "Tools/Tools/NSArray+Build.h"; sourceTree = "<group>"; };
-		38EA10D01B5E3993004EE76E /* NSArray+Build.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSArray+Build.m"; path = "Tools/Tools/NSArray+Build.m"; sourceTree = "<group>"; };
-		38EA10D11B5E3993004EE76E /* NSArray+MapReduce.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSArray+MapReduce.h"; path = "Tools/Tools/NSArray+MapReduce.h"; sourceTree = "<group>"; };
-		38EA10D21B5E3993004EE76E /* NSArray+MapReduce.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSArray+MapReduce.m"; path = "Tools/Tools/NSArray+MapReduce.m"; sourceTree = "<group>"; };
-		38EA10D31B5E3993004EE76E /* NSDictionary+Map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+Map.h"; path = "Tools/Tools/NSDictionary+Map.h"; sourceTree = "<group>"; };
-		38EA10D41B5E3993004EE76E /* NSDictionary+Map.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDictionary+Map.m"; path = "Tools/Tools/NSDictionary+Map.m"; sourceTree = "<group>"; };
-		38EA10D51B5E3993004EE76E /* NSDictionary+Optionals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+Optionals.h"; path = "Tools/Tools/NSDictionary+Optionals.h"; sourceTree = "<group>"; };
-		38EA10D61B5E3993004EE76E /* NSDictionary+Optionals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDictionary+Optionals.m"; path = "Tools/Tools/NSDictionary+Optionals.m"; sourceTree = "<group>"; };
-		38EA10D71B5E3993004EE76E /* NSDictionary+RequestClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+RequestClass.h"; path = "Tools/Tools/NSDictionary+RequestClass.h"; sourceTree = "<group>"; };
-		38EA10D81B5E3993004EE76E /* NSDictionary+RequestClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDictionary+RequestClass.m"; path = "Tools/Tools/NSDictionary+RequestClass.m"; sourceTree = "<group>"; };
-		38EA10D91B5E3993004EE76E /* NSObject+Maybe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSObject+Maybe.h"; path = "Tools/Tools/NSObject+Maybe.h"; sourceTree = "<group>"; };
-		38EA10DA1B5E3993004EE76E /* NSObject+Maybe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSObject+Maybe.m"; path = "Tools/Tools/NSObject+Maybe.m"; sourceTree = "<group>"; };
-		38EA10DB1B5E3993004EE76E /* Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Tools.h; path = Tools/Tools/Tools.h; sourceTree = "<group>"; };
-		38EA10DC1B5E3993004EE76E /* Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Tools.m; path = Tools/Tools/Tools.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +92,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3805032C1B60D0A60062DE76 /* libTools.a in Frameworks */,
+				3805032B1B60D0A30062DE76 /* libOptional.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,6 +108,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3805031A1B60D0850062DE76 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3805031F1B60D0850062DE76 /* libOptional.a */,
+				380503211B60D0850062DE76 /* OptionalTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		380503231B60D0890062DE76 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				380503281B60D0890062DE76 /* libTools.a */,
+				3805032A1B60D0890062DE76 /* ToolsTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		38EA106E1B5E33A0004EE76E = {
 			isa = PBXGroup;
 			children = (
@@ -173,20 +200,7 @@
 		38EA10C91B5E3967004EE76E /* Tools */ = {
 			isa = PBXGroup;
 			children = (
-				38EA10CF1B5E3993004EE76E /* NSArray+Build.h */,
-				38EA10D01B5E3993004EE76E /* NSArray+Build.m */,
-				38EA10D11B5E3993004EE76E /* NSArray+MapReduce.h */,
-				38EA10D21B5E3993004EE76E /* NSArray+MapReduce.m */,
-				38EA10D31B5E3993004EE76E /* NSDictionary+Map.h */,
-				38EA10D41B5E3993004EE76E /* NSDictionary+Map.m */,
-				38EA10D51B5E3993004EE76E /* NSDictionary+Optionals.h */,
-				38EA10D61B5E3993004EE76E /* NSDictionary+Optionals.m */,
-				38EA10D71B5E3993004EE76E /* NSDictionary+RequestClass.h */,
-				38EA10D81B5E3993004EE76E /* NSDictionary+RequestClass.m */,
-				38EA10D91B5E3993004EE76E /* NSObject+Maybe.h */,
-				38EA10DA1B5E3993004EE76E /* NSObject+Maybe.m */,
-				38EA10DB1B5E3993004EE76E /* Tools.h */,
-				38EA10DC1B5E3993004EE76E /* Tools.m */,
+				380503221B60D0890062DE76 /* Tools.xcodeproj */,
 			);
 			name = Tools;
 			sourceTree = "<group>";
@@ -194,9 +208,7 @@
 		38EA10CA1B5E396C004EE76E /* Optional */ = {
 			isa = PBXGroup;
 			children = (
-				38EA10CB1B5E3983004EE76E /* Optional_Internal.h */,
-				38EA10CC1B5E3983004EE76E /* Optional.h */,
-				38EA10CD1B5E3983004EE76E /* Optional.m */,
+				380503191B60D0850062DE76 /* Optional.xcodeproj */,
 			);
 			name = Optional;
 			sourceTree = "<group>";
@@ -266,6 +278,16 @@
 			mainGroup = 38EA106E1B5E33A0004EE76E;
 			productRefGroup = 38EA10781B5E33A0004EE76E /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 3805031A1B60D0850062DE76 /* Products */;
+					ProjectRef = 380503191B60D0850062DE76 /* Optional.xcodeproj */;
+				},
+				{
+					ProductGroup = 380503231B60D0890062DE76 /* Products */;
+					ProjectRef = 380503221B60D0890062DE76 /* Tools.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				38EA10761B5E33A0004EE76E /* ErrorClient */,
@@ -273,6 +295,37 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		3805031F1B60D0850062DE76 /* libOptional.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libOptional.a;
+			remoteRef = 3805031E1B60D0850062DE76 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		380503211B60D0850062DE76 /* OptionalTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = OptionalTests.xctest;
+			remoteRef = 380503201B60D0850062DE76 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		380503281B60D0890062DE76 /* libTools.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libTools.a;
+			remoteRef = 380503271B60D0890062DE76 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3805032A1B60D0890062DE76 /* ToolsTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = ToolsTests.xctest;
+			remoteRef = 380503291B60D0890062DE76 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		38EA10801B5E33A0004EE76E /* Resources */ = {
@@ -292,16 +345,8 @@
 				38EA10991B5E33D9004EE76E /* CodeCoordinate.m in Sources */,
 				38EA10971B5E33D9004EE76E /* ErrorEntity.m in Sources */,
 				38EA10981B5E33D9004EE76E /* ErrorClient.m in Sources */,
-				38EA10CE1B5E3983004EE76E /* Optional.m in Sources */,
-				38EA10E21B5E3993004EE76E /* NSObject+Maybe.m in Sources */,
-				38EA10DF1B5E3993004EE76E /* NSDictionary+Map.m in Sources */,
-				38EA10E31B5E3993004EE76E /* Tools.m in Sources */,
 				38EA10C31B5E374F004EE76E /* RavenClient.m in Sources */,
-				38EA10E11B5E3993004EE76E /* NSDictionary+RequestClass.m in Sources */,
-				38EA10E01B5E3993004EE76E /* NSDictionary+Optionals.m in Sources */,
 				38EA10C41B5E374F004EE76E /* RavenConfig.m in Sources */,
-				38EA10DD1B5E3993004EE76E /* NSArray+Build.m in Sources */,
-				38EA10DE1B5E3993004EE76E /* NSArray+MapReduce.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,6 +403,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/**",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -394,6 +444,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/**",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
@@ -478,6 +533,7 @@
 				38EA108D1B5E33A0004EE76E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		38EA108E1B5E33A0004EE76E /* Build configuration list for PBXNativeTarget "ErrorClientTests" */ = {
 			isa = XCConfigurationList;
@@ -486,6 +542,7 @@
 				38EA10901B5E33A0004EE76E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
