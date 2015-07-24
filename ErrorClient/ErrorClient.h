@@ -4,6 +4,7 @@
 #import "MessageEntity.h"
 
 extern NSString* const k_errorServerURLStringUserDefaultsKey;
+extern NSString* const k_customTagsKey;
 
 @interface ErrorClient : NSObject
 

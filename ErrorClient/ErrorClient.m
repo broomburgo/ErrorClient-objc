@@ -7,6 +7,7 @@
 #import <execinfo.h>
 
 NSString* const k_errorServerURLStringUserDefaultsKey = @"k_errorServerURLStringUserDefaultsKey";
+NSString* const k_customTagsKey = @"Custom tags";
 
 @interface SignalException : NSException
 
@@ -82,9 +83,9 @@ NSString* const k_errorServerURLStringUserDefaultsKey = @"k_errorServerURLString
     if (ravenClient != nil) {
         [ravenClient captureMessage:info.text
                               level:kRavenLogLevelDebugInfo
-                    additionalExtra:nil
+                    additionalExtra:info.info
                      additionalTags:[@{}
-                                     key:@"custom_tags" optional:info.standardTagsString]
+                                     key:k_customTagsKey optional:info.standardTagsString]
                              method:coordinate ? coordinate.method : NULL
                                file:coordinate ? coordinate.file : NULL
                                line:coordinate ? coordinate.line : 0];
@@ -100,9 +101,9 @@ NSString* const k_errorServerURLStringUserDefaultsKey = @"k_errorServerURLString
     if (ravenClient != nil) {
         [ravenClient captureMessage:warning.text
                               level:kRavenLogLevelDebugWarning
-                    additionalExtra:nil
+                    additionalExtra:warning.info
                      additionalTags:[@{}
-                                     key:@"custom_tags" optional:warning.standardTagsString]
+                                     key:k_customTagsKey optional:warning.standardTagsString]
                              method:coordinate ? coordinate.method : NULL
                                file:coordinate ? coordinate.file : NULL
                                line:coordinate ? coordinate.line : 0];
@@ -118,9 +119,9 @@ NSString* const k_errorServerURLStringUserDefaultsKey = @"k_errorServerURLString
     if (ravenClient != nil) {
         [ravenClient captureMessage:error.text
                               level:kRavenLogLevelDebugError
-                    additionalExtra:nil
+                    additionalExtra:error.info
                      additionalTags:[@{}
-                                     key:@"custom_tags" optional:error.standardTagsString]
+                                     key:k_customTagsKey optional:error.standardTagsString]
                              method:coordinate ? coordinate.method : NULL
                                file:coordinate ? coordinate.file : NULL
                                line:coordinate ? coordinate.line : 0];
