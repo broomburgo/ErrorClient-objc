@@ -1,4 +1,5 @@
 #import "ErrorClient.h"
+#import <UIKit/UIKit.h>
 
 #import "Optional.h"
 #import "Tools.h"
@@ -8,6 +9,8 @@
 
 NSString* const k_errorServerURLStringUserDefaultsKey = @"k_errorServerURLStringUserDefaultsKey";
 NSString* const k_customTagsKey = @"Custom tags";
+
+static NSString* const kCustomUserIdUserDefaultsKey = @"kCustomUserIdUserDefaultsKey";
 
 @interface SignalException : NSException
 
@@ -46,7 +49,20 @@ NSString* const k_customTagsKey = @"Custom tags";
 
 + (void)initialize {
     if (self == [ErrorClient self]) {
-        [RavenClient setSharedClient:[RavenClient clientWithDSN:[[NSUserDefaults standardUserDefaults] stringForKey:k_errorServerURLStringUserDefaultsKey]]];
+        RavenClient* sharedClient = [RavenClient clientWithDSN:[[NSUserDefaults standardUserDefaults] stringForKey:k_errorServerURLStringUserDefaultsKey]];
+        NSString* identifierForVendor = [UIDevice currentDevice].identifierForVendor.UUIDString;
+        if (identifierForVendor.length > 0) {
+            sharedClient.user = @{@"vendor_id": identifierForVendor};
+        }
+        else {
+            NSString* customUserId = [[NSUserDefaults standardUserDefaults] stringForKey:kCustomUserIdUserDefaultsKey];
+            if (customUserId.length == 0) {
+                customUserId = [Tools randomStringWithLength:16];
+                [[NSUserDefaults standardUserDefaults] setObject:customUserId forKey:kCustomUserIdUserDefaultsKey];
+            }
+            sharedClient.user = @{@"custom_id": customUserId};
+        }
+        [RavenClient setSharedClient:sharedClient];
     }
 }
 
