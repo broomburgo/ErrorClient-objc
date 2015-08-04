@@ -50,9 +50,7 @@ NSString* const k_standardTagsStringSeparator = @"|";
 
 - (NSString*)standardTagsString {
     NSString* separator = self.tagsStringSeparator ? self.tagsStringSeparator : @"";
-    return [[(NSArray*)
-             [[OptionalArray with:self.tags]
-              value]
+    return [[self.tags
              reduceWithStartingElement:@"" reduceBlock:^id(id accumulator, id object) {
                  return [accumulator stringByAppendingFormat:@"%@%@", object, separator];
              }]
