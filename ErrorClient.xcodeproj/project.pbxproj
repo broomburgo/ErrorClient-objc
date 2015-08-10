@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3805032B1B60D0A30062DE76 /* libOptional.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3805031F1B60D0850062DE76 /* libOptional.a */; };
 		3805032C1B60D0A60062DE76 /* libTools.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 380503281B60D0890062DE76 /* libTools.a */; };
 		38EA10831B5E33A0004EE76E /* libErrorClient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 38EA10771B5E33A0004EE76E /* libErrorClient.a */; };
 		38EA10971B5E33D9004EE76E /* MessageEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EA10921B5E33D9004EE76E /* MessageEntity.m */; };
@@ -18,20 +17,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		3805031E1B60D0850062DE76 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 380503191B60D0850062DE76 /* Optional.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 38F7F0571B4BC194008FE800;
-			remoteInfo = Optional;
-		};
-		380503201B60D0850062DE76 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 380503191B60D0850062DE76 /* Optional.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 38F7F0621B4BC194008FE800;
-			remoteInfo = OptionalTests;
-		};
 		380503271B60D0890062DE76 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 380503221B60D0890062DE76 /* Tools.xcodeproj */;
@@ -68,7 +53,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		380503191B60D0850062DE76 /* Optional.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Optional.xcodeproj; path = Optional/Optional.xcodeproj; sourceTree = "<group>"; };
 		380503221B60D0890062DE76 /* Tools.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Tools.xcodeproj; path = Tools/Tools.xcodeproj; sourceTree = "<group>"; };
 		38EA10771B5E33A0004EE76E /* libErrorClient.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libErrorClient.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		38EA10821B5E33A0004EE76E /* ErrorClientTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ErrorClientTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -93,7 +77,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3805032C1B60D0A60062DE76 /* libTools.a in Frameworks */,
-				3805032B1B60D0A30062DE76 /* libOptional.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,15 +91,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3805031A1B60D0850062DE76 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				3805031F1B60D0850062DE76 /* libOptional.a */,
-				380503211B60D0850062DE76 /* OptionalTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		380503231B60D0890062DE76 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -177,7 +151,6 @@
 		38EA109A1B5E3595004EE76E /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				38EA10CA1B5E396C004EE76E /* Optional */,
 				38EA10C91B5E3967004EE76E /* Tools */,
 				38EA10BC1B5E373E004EE76E /* Raven */,
 			);
@@ -203,14 +176,6 @@
 				380503221B60D0890062DE76 /* Tools.xcodeproj */,
 			);
 			name = Tools;
-			sourceTree = "<group>";
-		};
-		38EA10CA1B5E396C004EE76E /* Optional */ = {
-			isa = PBXGroup;
-			children = (
-				380503191B60D0850062DE76 /* Optional.xcodeproj */,
-			);
-			name = Optional;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -280,10 +245,6 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 3805031A1B60D0850062DE76 /* Products */;
-					ProjectRef = 380503191B60D0850062DE76 /* Optional.xcodeproj */;
-				},
-				{
 					ProductGroup = 380503231B60D0890062DE76 /* Products */;
 					ProjectRef = 380503221B60D0890062DE76 /* Tools.xcodeproj */;
 				},
@@ -297,20 +258,6 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		3805031F1B60D0850062DE76 /* libOptional.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libOptional.a;
-			remoteRef = 3805031E1B60D0850062DE76 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		380503211B60D0850062DE76 /* OptionalTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = OptionalTests.xctest;
-			remoteRef = 380503201B60D0850062DE76 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		380503281B60D0890062DE76 /* libTools.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
