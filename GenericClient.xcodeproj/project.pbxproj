@@ -57,28 +57,28 @@
 
 /* Begin PBXFileReference section */
 		380503221B60D0890062DE76 /* Tools.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Tools.xcodeproj; path = Tools/Tools.xcodeproj; sourceTree = "<group>"; };
-		387760E81B7A382F00335AE5 /* Client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Client.h; path = ErrorClient/Client.h; sourceTree = "<group>"; };
+		387760E81B7A382F00335AE5 /* Client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Client.h; path = GenericClient/Client.h; sourceTree = "<group>"; };
 		38EA10771B5E33A0004EE76E /* libGenericClient.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libGenericClient.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		38EA10821B5E33A0004EE76E /* GenericClientTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GenericClientTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		38EA10881B5E33A0004EE76E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		38EA10911B5E33D9004EE76E /* MessageEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageEntity.h; path = ErrorClient/MessageEntity.h; sourceTree = "<group>"; };
-		38EA10921B5E33D9004EE76E /* MessageEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MessageEntity.m; path = ErrorClient/MessageEntity.m; sourceTree = "<group>"; };
-		38EA10931B5E33D9004EE76E /* ErrorClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ErrorClient.h; sourceTree = "<group>"; };
-		38EA10941B5E33D9004EE76E /* ErrorClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ErrorClient.m; sourceTree = "<group>"; };
-		38EA10951B5E33D9004EE76E /* CodeCoordinate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CodeCoordinate.h; path = ErrorClient/CodeCoordinate.h; sourceTree = "<group>"; };
-		38EA10961B5E33D9004EE76E /* CodeCoordinate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CodeCoordinate.m; path = ErrorClient/CodeCoordinate.m; sourceTree = "<group>"; };
+		38EA10881B5E33A0004EE76E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../GenericClientTests/Info.plist; sourceTree = "<group>"; };
+		38EA10911B5E33D9004EE76E /* MessageEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageEntity.h; path = GenericClient/MessageEntity.h; sourceTree = "<group>"; };
+		38EA10921B5E33D9004EE76E /* MessageEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MessageEntity.m; path = GenericClient/MessageEntity.m; sourceTree = "<group>"; };
+		38EA10931B5E33D9004EE76E /* ErrorClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ErrorClient.h; path = ../GenericClient/ErrorClient.h; sourceTree = "<group>"; };
+		38EA10941B5E33D9004EE76E /* ErrorClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ErrorClient.m; path = ../GenericClient/ErrorClient.m; sourceTree = "<group>"; };
+		38EA10951B5E33D9004EE76E /* CodeCoordinate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CodeCoordinate.h; path = GenericClient/CodeCoordinate.h; sourceTree = "<group>"; };
+		38EA10961B5E33D9004EE76E /* CodeCoordinate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CodeCoordinate.m; path = GenericClient/CodeCoordinate.m; sourceTree = "<group>"; };
 		38EA10BD1B5E374F004EE76E /* Raven.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Raven.h; path = Raven/Raven/Raven.h; sourceTree = "<group>"; };
 		38EA10BE1B5E374F004EE76E /* RavenClient_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RavenClient_Private.h; path = Raven/Raven/RavenClient_Private.h; sourceTree = "<group>"; };
 		38EA10BF1B5E374F004EE76E /* RavenClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RavenClient.h; path = Raven/Raven/RavenClient.h; sourceTree = "<group>"; };
 		38EA10C01B5E374F004EE76E /* RavenClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RavenClient.m; path = Raven/Raven/RavenClient.m; sourceTree = "<group>"; };
 		38EA10C11B5E374F004EE76E /* RavenConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RavenConfig.h; path = Raven/Raven/RavenConfig.h; sourceTree = "<group>"; };
 		38EA10C21B5E374F004EE76E /* RavenConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RavenConfig.m; path = Raven/Raven/RavenConfig.m; sourceTree = "<group>"; };
-		38F4CE9A1B79D1A600A8F464 /* GenericClient+OutputHandling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GenericClient+OutputHandling.h"; sourceTree = "<group>"; };
-		38F4CE9B1B79D1A600A8F464 /* GenericClient+OutputHandling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GenericClient+OutputHandling.m"; sourceTree = "<group>"; };
-		38F4CEA01B79D27400A8F464 /* ClientManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ClientManager.h; path = ErrorClient/ClientManager.h; sourceTree = "<group>"; };
-		38F4CEA11B79D27400A8F464 /* ClientManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ClientManager.m; path = ErrorClient/ClientManager.m; sourceTree = "<group>"; };
-		38F4CEA21B79D27400A8F464 /* GenericClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GenericClient.h; path = ErrorClient/GenericClient.h; sourceTree = "<group>"; };
-		38F4CEA31B79D27400A8F464 /* GenericClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GenericClient.m; path = ErrorClient/GenericClient.m; sourceTree = "<group>"; };
+		38F4CE9A1B79D1A600A8F464 /* GenericClient+OutputHandling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "GenericClient+OutputHandling.h"; path = "../GenericClient/GenericClient+OutputHandling.h"; sourceTree = "<group>"; };
+		38F4CE9B1B79D1A600A8F464 /* GenericClient+OutputHandling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "GenericClient+OutputHandling.m"; path = "../GenericClient/GenericClient+OutputHandling.m"; sourceTree = "<group>"; };
+		38F4CEA01B79D27400A8F464 /* ClientManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ClientManager.h; path = GenericClient/ClientManager.h; sourceTree = "<group>"; };
+		38F4CEA11B79D27400A8F464 /* ClientManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ClientManager.m; path = GenericClient/ClientManager.m; sourceTree = "<group>"; };
+		38F4CEA21B79D27400A8F464 /* GenericClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GenericClient.h; path = GenericClient/GenericClient.h; sourceTree = "<group>"; };
+		38F4CEA31B79D27400A8F464 /* GenericClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GenericClient.m; path = GenericClient/GenericClient.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
