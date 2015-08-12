@@ -1,4 +1,3 @@
-
 #import <Foundation/Foundation.h>
 
 @interface CodeCoordinate : NSObject
@@ -9,7 +8,7 @@
 
 + (CodeCoordinate*)coordinateWithMethod:(const char *)method file:(const char *)file line:(NSInteger)line;
 
-#define kCodeCoordinateHere [CodeCoordinate coordinateWithMethod:__FUNCTION__ file:__FILE__ line:__LINE__]
+#define CodeCoordinateHere [CodeCoordinate coordinateWithMethod:__FUNCTION__ file:__FILE__ line:__LINE__]
 
 @end
 

@@ -2,7 +2,7 @@
 #import "Optional.h"
 #import "Tools.h"
 
-NSString* const k_standardTagsStringSeparator = @"|";
+NSString* const kStandardTagsStringSeparator = @"|";
 
 @interface MessageEntity ()
 
@@ -19,7 +19,7 @@ NSString* const k_standardTagsStringSeparator = @"|";
     if (self == nil) {
         return nil;
     }
-    _tagsStringSeparator = k_standardTagsStringSeparator;
+    _tagsStringSeparator = kStandardTagsStringSeparator;
     return self;
 }
 

@@ -8,12 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		3805032C1B60D0A60062DE76 /* libTools.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 380503281B60D0890062DE76 /* libTools.a */; };
-		38EA10831B5E33A0004EE76E /* libErrorClient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 38EA10771B5E33A0004EE76E /* libErrorClient.a */; };
+		38EA10831B5E33A0004EE76E /* libGenericClient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 38EA10771B5E33A0004EE76E /* libGenericClient.a */; };
 		38EA10971B5E33D9004EE76E /* MessageEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EA10921B5E33D9004EE76E /* MessageEntity.m */; };
 		38EA10981B5E33D9004EE76E /* ErrorClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EA10941B5E33D9004EE76E /* ErrorClient.m */; };
 		38EA10991B5E33D9004EE76E /* CodeCoordinate.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EA10961B5E33D9004EE76E /* CodeCoordinate.m */; };
 		38EA10C31B5E374F004EE76E /* RavenClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EA10C01B5E374F004EE76E /* RavenClient.m */; };
 		38EA10C41B5E374F004EE76E /* RavenConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EA10C21B5E374F004EE76E /* RavenConfig.m */; };
+		38F4CE9C1B79D1A600A8F464 /* GenericClient+OutputHandling.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F4CE9B1B79D1A600A8F464 /* GenericClient+OutputHandling.m */; };
+		38F4CEA41B79D27400A8F464 /* ClientManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F4CEA11B79D27400A8F464 /* ClientManager.m */; };
+		38F4CEA51B79D27400A8F464 /* GenericClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F4CEA31B79D27400A8F464 /* GenericClient.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,21 +57,28 @@
 
 /* Begin PBXFileReference section */
 		380503221B60D0890062DE76 /* Tools.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Tools.xcodeproj; path = Tools/Tools.xcodeproj; sourceTree = "<group>"; };
-		38EA10771B5E33A0004EE76E /* libErrorClient.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libErrorClient.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		38EA10821B5E33A0004EE76E /* ErrorClientTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ErrorClientTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		387760E81B7A382F00335AE5 /* Client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Client.h; path = ErrorClient/Client.h; sourceTree = "<group>"; };
+		38EA10771B5E33A0004EE76E /* libGenericClient.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libGenericClient.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		38EA10821B5E33A0004EE76E /* GenericClientTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GenericClientTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		38EA10881B5E33A0004EE76E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		38EA10911B5E33D9004EE76E /* MessageEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageEntity.h; sourceTree = "<group>"; };
-		38EA10921B5E33D9004EE76E /* MessageEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageEntity.m; sourceTree = "<group>"; };
+		38EA10911B5E33D9004EE76E /* MessageEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageEntity.h; path = ErrorClient/MessageEntity.h; sourceTree = "<group>"; };
+		38EA10921B5E33D9004EE76E /* MessageEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MessageEntity.m; path = ErrorClient/MessageEntity.m; sourceTree = "<group>"; };
 		38EA10931B5E33D9004EE76E /* ErrorClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ErrorClient.h; sourceTree = "<group>"; };
 		38EA10941B5E33D9004EE76E /* ErrorClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ErrorClient.m; sourceTree = "<group>"; };
-		38EA10951B5E33D9004EE76E /* CodeCoordinate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodeCoordinate.h; sourceTree = "<group>"; };
-		38EA10961B5E33D9004EE76E /* CodeCoordinate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CodeCoordinate.m; sourceTree = "<group>"; };
+		38EA10951B5E33D9004EE76E /* CodeCoordinate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CodeCoordinate.h; path = ErrorClient/CodeCoordinate.h; sourceTree = "<group>"; };
+		38EA10961B5E33D9004EE76E /* CodeCoordinate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CodeCoordinate.m; path = ErrorClient/CodeCoordinate.m; sourceTree = "<group>"; };
 		38EA10BD1B5E374F004EE76E /* Raven.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Raven.h; path = Raven/Raven/Raven.h; sourceTree = "<group>"; };
 		38EA10BE1B5E374F004EE76E /* RavenClient_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RavenClient_Private.h; path = Raven/Raven/RavenClient_Private.h; sourceTree = "<group>"; };
 		38EA10BF1B5E374F004EE76E /* RavenClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RavenClient.h; path = Raven/Raven/RavenClient.h; sourceTree = "<group>"; };
 		38EA10C01B5E374F004EE76E /* RavenClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RavenClient.m; path = Raven/Raven/RavenClient.m; sourceTree = "<group>"; };
 		38EA10C11B5E374F004EE76E /* RavenConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RavenConfig.h; path = Raven/Raven/RavenConfig.h; sourceTree = "<group>"; };
 		38EA10C21B5E374F004EE76E /* RavenConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RavenConfig.m; path = Raven/Raven/RavenConfig.m; sourceTree = "<group>"; };
+		38F4CE9A1B79D1A600A8F464 /* GenericClient+OutputHandling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GenericClient+OutputHandling.h"; sourceTree = "<group>"; };
+		38F4CE9B1B79D1A600A8F464 /* GenericClient+OutputHandling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GenericClient+OutputHandling.m"; sourceTree = "<group>"; };
+		38F4CEA01B79D27400A8F464 /* ClientManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ClientManager.h; path = ErrorClient/ClientManager.h; sourceTree = "<group>"; };
+		38F4CEA11B79D27400A8F464 /* ClientManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ClientManager.m; path = ErrorClient/ClientManager.m; sourceTree = "<group>"; };
+		38F4CEA21B79D27400A8F464 /* GenericClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GenericClient.h; path = ErrorClient/GenericClient.h; sourceTree = "<group>"; };
+		38F4CEA31B79D27400A8F464 /* GenericClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GenericClient.m; path = ErrorClient/GenericClient.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,7 +94,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				38EA10831B5E33A0004EE76E /* libErrorClient.a in Frameworks */,
+				38EA10831B5E33A0004EE76E /* libGenericClient.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,7 +113,10 @@
 		38EA106E1B5E33A0004EE76E = {
 			isa = PBXGroup;
 			children = (
-				38EA10791B5E33A0004EE76E /* ErrorClient */,
+				387760E81B7A382F00335AE5 /* Client.h */,
+				38F4CE9F1B79D24600A8F464 /* Generic Client */,
+				38F4CEA81B79D2A700A8F464 /* Messages */,
+				38EA10791B5E33A0004EE76E /* Outputs */,
 				38EA10861B5E33A0004EE76E /* ErrorClientTests */,
 				38EA109A1B5E3595004EE76E /* Libraries */,
 				38EA10781B5E33A0004EE76E /* Products */,
@@ -113,22 +126,21 @@
 		38EA10781B5E33A0004EE76E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				38EA10771B5E33A0004EE76E /* libErrorClient.a */,
-				38EA10821B5E33A0004EE76E /* ErrorClientTests.xctest */,
+				38EA10771B5E33A0004EE76E /* libGenericClient.a */,
+				38EA10821B5E33A0004EE76E /* GenericClientTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		38EA10791B5E33A0004EE76E /* ErrorClient */ = {
+		38EA10791B5E33A0004EE76E /* Outputs */ = {
 			isa = PBXGroup;
 			children = (
-				38EA10951B5E33D9004EE76E /* CodeCoordinate.h */,
-				38EA10961B5E33D9004EE76E /* CodeCoordinate.m */,
 				38EA10931B5E33D9004EE76E /* ErrorClient.h */,
 				38EA10941B5E33D9004EE76E /* ErrorClient.m */,
-				38EA10911B5E33D9004EE76E /* MessageEntity.h */,
-				38EA10921B5E33D9004EE76E /* MessageEntity.m */,
+				38F4CE9A1B79D1A600A8F464 /* GenericClient+OutputHandling.h */,
+				38F4CE9B1B79D1A600A8F464 /* GenericClient+OutputHandling.m */,
 			);
+			name = Outputs;
 			path = ErrorClient;
 			sourceTree = "<group>";
 		};
@@ -178,12 +190,34 @@
 			name = Tools;
 			sourceTree = "<group>";
 		};
+		38F4CE9F1B79D24600A8F464 /* Generic Client */ = {
+			isa = PBXGroup;
+			children = (
+				38F4CEA01B79D27400A8F464 /* ClientManager.h */,
+				38F4CEA11B79D27400A8F464 /* ClientManager.m */,
+				38F4CEA21B79D27400A8F464 /* GenericClient.h */,
+				38F4CEA31B79D27400A8F464 /* GenericClient.m */,
+			);
+			name = "Generic Client";
+			sourceTree = "<group>";
+		};
+		38F4CEA81B79D2A700A8F464 /* Messages */ = {
+			isa = PBXGroup;
+			children = (
+				38EA10951B5E33D9004EE76E /* CodeCoordinate.h */,
+				38EA10961B5E33D9004EE76E /* CodeCoordinate.m */,
+				38EA10911B5E33D9004EE76E /* MessageEntity.h */,
+				38EA10921B5E33D9004EE76E /* MessageEntity.m */,
+			);
+			name = Messages;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		38EA10761B5E33A0004EE76E /* ErrorClient */ = {
+		38EA10761B5E33A0004EE76E /* GenericClient */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 38EA108B1B5E33A0004EE76E /* Build configuration list for PBXNativeTarget "ErrorClient" */;
+			buildConfigurationList = 38EA108B1B5E33A0004EE76E /* Build configuration list for PBXNativeTarget "GenericClient" */;
 			buildPhases = (
 				38EA10731B5E33A0004EE76E /* Sources */,
 				38EA10741B5E33A0004EE76E /* Frameworks */,
@@ -193,14 +227,14 @@
 			);
 			dependencies = (
 			);
-			name = ErrorClient;
+			name = GenericClient;
 			productName = ErrorClient;
-			productReference = 38EA10771B5E33A0004EE76E /* libErrorClient.a */;
+			productReference = 38EA10771B5E33A0004EE76E /* libGenericClient.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		38EA10811B5E33A0004EE76E /* ErrorClientTests */ = {
+		38EA10811B5E33A0004EE76E /* GenericClientTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 38EA108E1B5E33A0004EE76E /* Build configuration list for PBXNativeTarget "ErrorClientTests" */;
+			buildConfigurationList = 38EA108E1B5E33A0004EE76E /* Build configuration list for PBXNativeTarget "GenericClientTests" */;
 			buildPhases = (
 				38EA107E1B5E33A0004EE76E /* Sources */,
 				38EA107F1B5E33A0004EE76E /* Frameworks */,
@@ -211,9 +245,9 @@
 			dependencies = (
 				38EA10851B5E33A0004EE76E /* PBXTargetDependency */,
 			);
-			name = ErrorClientTests;
+			name = GenericClientTests;
 			productName = ErrorClientTests;
-			productReference = 38EA10821B5E33A0004EE76E /* ErrorClientTests.xctest */;
+			productReference = 38EA10821B5E33A0004EE76E /* GenericClientTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -233,7 +267,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 38EA10721B5E33A0004EE76E /* Build configuration list for PBXProject "ErrorClient" */;
+			buildConfigurationList = 38EA10721B5E33A0004EE76E /* Build configuration list for PBXProject "GenericClient" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -251,8 +285,8 @@
 			);
 			projectRoot = "";
 			targets = (
-				38EA10761B5E33A0004EE76E /* ErrorClient */,
-				38EA10811B5E33A0004EE76E /* ErrorClientTests */,
+				38EA10761B5E33A0004EE76E /* GenericClient */,
+				38EA10811B5E33A0004EE76E /* GenericClientTests */,
 			);
 		};
 /* End PBXProject section */
@@ -291,9 +325,12 @@
 			files = (
 				38EA10991B5E33D9004EE76E /* CodeCoordinate.m in Sources */,
 				38EA10971B5E33D9004EE76E /* MessageEntity.m in Sources */,
+				38F4CEA41B79D27400A8F464 /* ClientManager.m in Sources */,
 				38EA10981B5E33D9004EE76E /* ErrorClient.m in Sources */,
 				38EA10C31B5E374F004EE76E /* RavenClient.m in Sources */,
 				38EA10C41B5E374F004EE76E /* RavenConfig.m in Sources */,
+				38F4CEA51B79D27400A8F464 /* GenericClient.m in Sources */,
+				38F4CE9C1B79D1A600A8F464 /* GenericClient+OutputHandling.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -309,7 +346,7 @@
 /* Begin PBXTargetDependency section */
 		38EA10851B5E33A0004EE76E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 38EA10761B5E33A0004EE76E /* ErrorClient */;
+			target = 38EA10761B5E33A0004EE76E /* GenericClient */;
 			targetProxy = 38EA10841B5E33A0004EE76E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -411,7 +448,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = GenericClient;
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -424,7 +461,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = GenericClient;
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -443,7 +480,7 @@
 				);
 				INFOPLIST_FILE = ErrorClientTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = GenericClientTests;
 			};
 			name = Debug;
 		};
@@ -457,14 +494,14 @@
 				);
 				INFOPLIST_FILE = ErrorClientTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = GenericClientTests;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		38EA10721B5E33A0004EE76E /* Build configuration list for PBXProject "ErrorClient" */ = {
+		38EA10721B5E33A0004EE76E /* Build configuration list for PBXProject "GenericClient" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				38EA10891B5E33A0004EE76E /* Debug */,
@@ -473,7 +510,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		38EA108B1B5E33A0004EE76E /* Build configuration list for PBXNativeTarget "ErrorClient" */ = {
+		38EA108B1B5E33A0004EE76E /* Build configuration list for PBXNativeTarget "GenericClient" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				38EA108C1B5E33A0004EE76E /* Debug */,
@@ -482,7 +519,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		38EA108E1B5E33A0004EE76E /* Build configuration list for PBXNativeTarget "ErrorClientTests" */ = {
+		38EA108E1B5E33A0004EE76E /* Build configuration list for PBXNativeTarget "GenericClientTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				38EA108F1B5E33A0004EE76E /* Debug */,

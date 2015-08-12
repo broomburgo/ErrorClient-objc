@@ -1,6 +1,6 @@
 #import <Foundation/Foundation.h>
 
-extern NSString* __nonnull const k_standardTagsStringSeparator;
+extern NSString* __nonnull const kStandardTagsStringSeparator;
 
 @interface MessageEntity : NSObject
 

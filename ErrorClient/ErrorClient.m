@@ -1,14 +1,16 @@
 #import "ErrorClient.h"
 #import <UIKit/UIKit.h>
 
-#import "Optional.h"
 #import "Tools.h"
 #import "RavenClient.h"
 
+#import "MessageEntity.h"
+#import "CodeCoordinate.h"
+
 #import <execinfo.h>
 
-NSString* const k_errorServerURLStringUserDefaultsKey = @"k_errorServerURLStringUserDefaultsKey";
-NSString* const k_customTagsKey = @"Custom tags";
+NSString* const kErrorServerURLStringUserDefaultsKey = @"kErrorServerURLStringUserDefaultsKey";
+NSString* const kCustomTagsKey = @"Custom tags";
 
 static NSString* const kCustomUserIdUserDefaultsKey = @"kCustomUserIdUserDefaultsKey";
 
@@ -49,7 +51,7 @@ static NSString* const kCustomUserIdUserDefaultsKey = @"kCustomUserIdUserDefault
 
 + (void)initialize {
     if (self == [ErrorClient self]) {
-        RavenClient* sharedClient = [RavenClient clientWithDSN:[[NSUserDefaults standardUserDefaults] stringForKey:k_errorServerURLStringUserDefaultsKey]];
+        RavenClient* sharedClient = [RavenClient clientWithDSN:[[NSUserDefaults standardUserDefaults] stringForKey:kErrorServerURLStringUserDefaultsKey]];
         NSString* identifierForVendor = [UIDevice currentDevice].identifierForVendor.UUIDString;
         if (identifierForVendor.length > 0) {
             sharedClient.user = @{@"vendor_id": identifierForVendor};
@@ -101,7 +103,7 @@ static NSString* const kCustomUserIdUserDefaultsKey = @"kCustomUserIdUserDefault
                               level:kRavenLogLevelDebugInfo
                     additionalExtra:info.info
                      additionalTags:[@{}
-                                     key:k_customTagsKey optional:info.standardTagsString]
+                                     key:kCustomTagsKey optional:info.standardTagsString]
                              method:coordinate ? coordinate.method : NULL
                                file:coordinate ? coordinate.file : NULL
                                line:coordinate ? coordinate.line : 0];
@@ -119,7 +121,7 @@ static NSString* const kCustomUserIdUserDefaultsKey = @"kCustomUserIdUserDefault
                               level:kRavenLogLevelDebugWarning
                     additionalExtra:warning.info
                      additionalTags:[@{}
-                                     key:k_customTagsKey optional:warning.standardTagsString]
+                                     key:kCustomTagsKey optional:warning.standardTagsString]
                              method:coordinate ? coordinate.method : NULL
                                file:coordinate ? coordinate.file : NULL
                                line:coordinate ? coordinate.line : 0];
@@ -137,7 +139,7 @@ static NSString* const kCustomUserIdUserDefaultsKey = @"kCustomUserIdUserDefault
                               level:kRavenLogLevelDebugError
                     additionalExtra:error.info
                      additionalTags:[@{}
-                                     key:k_customTagsKey optional:error.standardTagsString]
+                                     key:kCustomTagsKey optional:error.standardTagsString]
                              method:coordinate ? coordinate.method : NULL
                                file:coordinate ? coordinate.file : NULL
                                line:coordinate ? coordinate.line : 0];

@@ -1,10 +1,10 @@
 #import <Foundation/Foundation.h>
 
-#import "CodeCoordinate.h"
-#import "MessageEntity.h"
+@class CodeCoordinate;
+@class MessageEntity;
 
-extern NSString* const k_errorServerURLStringUserDefaultsKey;
-extern NSString* const k_customTagsKey;
+extern NSString* const kErrorServerURLStringUserDefaultsKey;
+extern NSString* const kCustomTagsKey;
 
 @interface ErrorClient : NSObject
 
