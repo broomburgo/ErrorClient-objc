@@ -8,15 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		3805032C1B60D0A60062DE76 /* libTools.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 380503281B60D0890062DE76 /* libTools.a */; };
-		38EA10831B5E33A0004EE76E /* libGenericClient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 38EA10771B5E33A0004EE76E /* libGenericClient.a */; };
-		38EA10971B5E33D9004EE76E /* MessageEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EA10921B5E33D9004EE76E /* MessageEntity.m */; };
-		38EA10981B5E33D9004EE76E /* ErrorClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EA10941B5E33D9004EE76E /* ErrorClient.m */; };
-		38EA10991B5E33D9004EE76E /* CodeCoordinate.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EA10961B5E33D9004EE76E /* CodeCoordinate.m */; };
 		38EA10C31B5E374F004EE76E /* RavenClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EA10C01B5E374F004EE76E /* RavenClient.m */; };
 		38EA10C41B5E374F004EE76E /* RavenConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EA10C21B5E374F004EE76E /* RavenConfig.m */; };
-		38F4CE9C1B79D1A600A8F464 /* GenericClient+OutputHandling.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F4CE9B1B79D1A600A8F464 /* GenericClient+OutputHandling.m */; };
-		38F4CEA41B79D27400A8F464 /* ClientManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F4CEA11B79D27400A8F464 /* ClientManager.m */; };
-		38F4CEA51B79D27400A8F464 /* GenericClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F4CEA31B79D27400A8F464 /* GenericClient.m */; };
+		38FB875B1B7CD2F300F4C5B3 /* ClientManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FB87581B7CD2F300F4C5B3 /* ClientManager.m */; };
+		38FB875C1B7CD2F300F4C5B3 /* GenericClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FB875A1B7CD2F300F4C5B3 /* GenericClient.m */; };
+		38FB87671B7CD34700F4C5B3 /* CodeCoordinate.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FB87641B7CD34700F4C5B3 /* CodeCoordinate.m */; };
+		38FB87681B7CD34700F4C5B3 /* MessageEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FB87661B7CD34700F4C5B3 /* MessageEntity.m */; };
+		38FB876D1B7CD36600F4C5B3 /* ErrorClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FB876A1B7CD36600F4C5B3 /* ErrorClient.m */; };
+		38FB876E1B7CD36600F4C5B3 /* GenericClient+OutputHandling.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FB876C1B7CD36600F4C5B3 /* GenericClient+OutputHandling.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,13 +33,6 @@
 			remoteGlobalIDString = 38EA10431B5E1DAD004EE76E;
 			remoteInfo = ToolsTests;
 		};
-		38EA10841B5E33A0004EE76E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 38EA106F1B5E33A0004EE76E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 38EA10761B5E33A0004EE76E;
-			remoteInfo = ErrorClient;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -57,28 +49,26 @@
 
 /* Begin PBXFileReference section */
 		380503221B60D0890062DE76 /* Tools.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Tools.xcodeproj; path = Tools/Tools.xcodeproj; sourceTree = "<group>"; };
-		387760E81B7A382F00335AE5 /* Client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Client.h; path = GenericClient/Client.h; sourceTree = "<group>"; };
 		38EA10771B5E33A0004EE76E /* libGenericClient.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libGenericClient.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		38EA10821B5E33A0004EE76E /* GenericClientTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GenericClientTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		38EA10881B5E33A0004EE76E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../GenericClientTests/Info.plist; sourceTree = "<group>"; };
-		38EA10911B5E33D9004EE76E /* MessageEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageEntity.h; path = GenericClient/MessageEntity.h; sourceTree = "<group>"; };
-		38EA10921B5E33D9004EE76E /* MessageEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MessageEntity.m; path = GenericClient/MessageEntity.m; sourceTree = "<group>"; };
-		38EA10931B5E33D9004EE76E /* ErrorClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ErrorClient.h; path = ../GenericClient/ErrorClient.h; sourceTree = "<group>"; };
-		38EA10941B5E33D9004EE76E /* ErrorClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ErrorClient.m; path = ../GenericClient/ErrorClient.m; sourceTree = "<group>"; };
-		38EA10951B5E33D9004EE76E /* CodeCoordinate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CodeCoordinate.h; path = GenericClient/CodeCoordinate.h; sourceTree = "<group>"; };
-		38EA10961B5E33D9004EE76E /* CodeCoordinate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CodeCoordinate.m; path = GenericClient/CodeCoordinate.m; sourceTree = "<group>"; };
 		38EA10BD1B5E374F004EE76E /* Raven.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Raven.h; path = Raven/Raven/Raven.h; sourceTree = "<group>"; };
 		38EA10BE1B5E374F004EE76E /* RavenClient_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RavenClient_Private.h; path = Raven/Raven/RavenClient_Private.h; sourceTree = "<group>"; };
 		38EA10BF1B5E374F004EE76E /* RavenClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RavenClient.h; path = Raven/Raven/RavenClient.h; sourceTree = "<group>"; };
 		38EA10C01B5E374F004EE76E /* RavenClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RavenClient.m; path = Raven/Raven/RavenClient.m; sourceTree = "<group>"; };
 		38EA10C11B5E374F004EE76E /* RavenConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RavenConfig.h; path = Raven/Raven/RavenConfig.h; sourceTree = "<group>"; };
 		38EA10C21B5E374F004EE76E /* RavenConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RavenConfig.m; path = Raven/Raven/RavenConfig.m; sourceTree = "<group>"; };
-		38F4CE9A1B79D1A600A8F464 /* GenericClient+OutputHandling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "GenericClient+OutputHandling.h"; path = "../GenericClient/GenericClient+OutputHandling.h"; sourceTree = "<group>"; };
-		38F4CE9B1B79D1A600A8F464 /* GenericClient+OutputHandling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "GenericClient+OutputHandling.m"; path = "../GenericClient/GenericClient+OutputHandling.m"; sourceTree = "<group>"; };
-		38F4CEA01B79D27400A8F464 /* ClientManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ClientManager.h; path = GenericClient/ClientManager.h; sourceTree = "<group>"; };
-		38F4CEA11B79D27400A8F464 /* ClientManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ClientManager.m; path = GenericClient/ClientManager.m; sourceTree = "<group>"; };
-		38F4CEA21B79D27400A8F464 /* GenericClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GenericClient.h; path = GenericClient/GenericClient.h; sourceTree = "<group>"; };
-		38F4CEA31B79D27400A8F464 /* GenericClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GenericClient.m; path = GenericClient/GenericClient.m; sourceTree = "<group>"; };
+		38FB87571B7CD2F300F4C5B3 /* ClientManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ClientManager.h; path = GenericClient/ClientManager.h; sourceTree = "<group>"; };
+		38FB87581B7CD2F300F4C5B3 /* ClientManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ClientManager.m; path = GenericClient/ClientManager.m; sourceTree = "<group>"; };
+		38FB87591B7CD2F300F4C5B3 /* GenericClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GenericClient.h; path = GenericClient/GenericClient.h; sourceTree = "<group>"; };
+		38FB875A1B7CD2F300F4C5B3 /* GenericClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GenericClient.m; path = GenericClient/GenericClient.m; sourceTree = "<group>"; };
+		38FB87631B7CD34700F4C5B3 /* CodeCoordinate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CodeCoordinate.h; path = GenericClient/CodeCoordinate.h; sourceTree = "<group>"; };
+		38FB87641B7CD34700F4C5B3 /* CodeCoordinate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CodeCoordinate.m; path = GenericClient/CodeCoordinate.m; sourceTree = "<group>"; };
+		38FB87651B7CD34700F4C5B3 /* MessageEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageEntity.h; path = GenericClient/MessageEntity.h; sourceTree = "<group>"; };
+		38FB87661B7CD34700F4C5B3 /* MessageEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MessageEntity.m; path = GenericClient/MessageEntity.m; sourceTree = "<group>"; };
+		38FB87691B7CD36600F4C5B3 /* ErrorClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ErrorClient.h; path = GenericClient/ErrorClient.h; sourceTree = SOURCE_ROOT; };
+		38FB876A1B7CD36600F4C5B3 /* ErrorClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ErrorClient.m; path = GenericClient/ErrorClient.m; sourceTree = SOURCE_ROOT; };
+		38FB876B1B7CD36600F4C5B3 /* GenericClient+OutputHandling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "GenericClient+OutputHandling.h"; path = "GenericClient/GenericClient+OutputHandling.h"; sourceTree = SOURCE_ROOT; };
+		38FB876C1B7CD36600F4C5B3 /* GenericClient+OutputHandling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "GenericClient+OutputHandling.m"; path = "GenericClient/GenericClient+OutputHandling.m"; sourceTree = SOURCE_ROOT; };
+		38FB87731B7CD49200F4C5B3 /* Client.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Client.h; path = GenericClient/Client.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,14 +77,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3805032C1B60D0A60062DE76 /* libTools.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		38EA107F1B5E33A0004EE76E /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				38EA10831B5E33A0004EE76E /* libGenericClient.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -113,11 +95,10 @@
 		38EA106E1B5E33A0004EE76E = {
 			isa = PBXGroup;
 			children = (
-				387760E81B7A382F00335AE5 /* Client.h */,
+				38FB87731B7CD49200F4C5B3 /* Client.h */,
 				38F4CE9F1B79D24600A8F464 /* Generic Client */,
 				38F4CEA81B79D2A700A8F464 /* Messages */,
 				38EA10791B5E33A0004EE76E /* Outputs */,
-				38EA10861B5E33A0004EE76E /* ErrorClientTests */,
 				38EA109A1B5E3595004EE76E /* Libraries */,
 				38EA10781B5E33A0004EE76E /* Products */,
 			);
@@ -127,7 +108,6 @@
 			isa = PBXGroup;
 			children = (
 				38EA10771B5E33A0004EE76E /* libGenericClient.a */,
-				38EA10821B5E33A0004EE76E /* GenericClientTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -135,29 +115,13 @@
 		38EA10791B5E33A0004EE76E /* Outputs */ = {
 			isa = PBXGroup;
 			children = (
-				38EA10931B5E33D9004EE76E /* ErrorClient.h */,
-				38EA10941B5E33D9004EE76E /* ErrorClient.m */,
-				38F4CE9A1B79D1A600A8F464 /* GenericClient+OutputHandling.h */,
-				38F4CE9B1B79D1A600A8F464 /* GenericClient+OutputHandling.m */,
+				38FB87691B7CD36600F4C5B3 /* ErrorClient.h */,
+				38FB876A1B7CD36600F4C5B3 /* ErrorClient.m */,
+				38FB876B1B7CD36600F4C5B3 /* GenericClient+OutputHandling.h */,
+				38FB876C1B7CD36600F4C5B3 /* GenericClient+OutputHandling.m */,
 			);
 			name = Outputs;
 			path = ErrorClient;
-			sourceTree = "<group>";
-		};
-		38EA10861B5E33A0004EE76E /* ErrorClientTests */ = {
-			isa = PBXGroup;
-			children = (
-				38EA10871B5E33A0004EE76E /* Supporting Files */,
-			);
-			path = ErrorClientTests;
-			sourceTree = "<group>";
-		};
-		38EA10871B5E33A0004EE76E /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				38EA10881B5E33A0004EE76E /* Info.plist */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		38EA109A1B5E3595004EE76E /* Libraries */ = {
@@ -193,10 +157,10 @@
 		38F4CE9F1B79D24600A8F464 /* Generic Client */ = {
 			isa = PBXGroup;
 			children = (
-				38F4CEA01B79D27400A8F464 /* ClientManager.h */,
-				38F4CEA11B79D27400A8F464 /* ClientManager.m */,
-				38F4CEA21B79D27400A8F464 /* GenericClient.h */,
-				38F4CEA31B79D27400A8F464 /* GenericClient.m */,
+				38FB87571B7CD2F300F4C5B3 /* ClientManager.h */,
+				38FB87581B7CD2F300F4C5B3 /* ClientManager.m */,
+				38FB87591B7CD2F300F4C5B3 /* GenericClient.h */,
+				38FB875A1B7CD2F300F4C5B3 /* GenericClient.m */,
 			);
 			name = "Generic Client";
 			sourceTree = "<group>";
@@ -204,10 +168,10 @@
 		38F4CEA81B79D2A700A8F464 /* Messages */ = {
 			isa = PBXGroup;
 			children = (
-				38EA10951B5E33D9004EE76E /* CodeCoordinate.h */,
-				38EA10961B5E33D9004EE76E /* CodeCoordinate.m */,
-				38EA10911B5E33D9004EE76E /* MessageEntity.h */,
-				38EA10921B5E33D9004EE76E /* MessageEntity.m */,
+				38FB87631B7CD34700F4C5B3 /* CodeCoordinate.h */,
+				38FB87641B7CD34700F4C5B3 /* CodeCoordinate.m */,
+				38FB87651B7CD34700F4C5B3 /* MessageEntity.h */,
+				38FB87661B7CD34700F4C5B3 /* MessageEntity.m */,
 			);
 			name = Messages;
 			sourceTree = "<group>";
@@ -232,24 +196,6 @@
 			productReference = 38EA10771B5E33A0004EE76E /* libGenericClient.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		38EA10811B5E33A0004EE76E /* GenericClientTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 38EA108E1B5E33A0004EE76E /* Build configuration list for PBXNativeTarget "GenericClientTests" */;
-			buildPhases = (
-				38EA107E1B5E33A0004EE76E /* Sources */,
-				38EA107F1B5E33A0004EE76E /* Frameworks */,
-				38EA10801B5E33A0004EE76E /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				38EA10851B5E33A0004EE76E /* PBXTargetDependency */,
-			);
-			name = GenericClientTests;
-			productName = ErrorClientTests;
-			productReference = 38EA10821B5E33A0004EE76E /* GenericClientTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -260,9 +206,6 @@
 				ORGANIZATIONNAME = Elvi;
 				TargetAttributes = {
 					38EA10761B5E33A0004EE76E = {
-						CreatedOnToolsVersion = 6.4;
-					};
-					38EA10811B5E33A0004EE76E = {
 						CreatedOnToolsVersion = 6.4;
 					};
 				};
@@ -286,7 +229,6 @@
 			projectRoot = "";
 			targets = (
 				38EA10761B5E33A0004EE76E /* GenericClient */,
-				38EA10811B5E33A0004EE76E /* GenericClientTests */,
 			);
 		};
 /* End PBXProject section */
@@ -308,48 +250,23 @@
 		};
 /* End PBXReferenceProxy section */
 
-/* Begin PBXResourcesBuildPhase section */
-		38EA10801B5E33A0004EE76E /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		38EA10731B5E33A0004EE76E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				38EA10991B5E33D9004EE76E /* CodeCoordinate.m in Sources */,
-				38EA10971B5E33D9004EE76E /* MessageEntity.m in Sources */,
-				38F4CEA41B79D27400A8F464 /* ClientManager.m in Sources */,
-				38EA10981B5E33D9004EE76E /* ErrorClient.m in Sources */,
+				38FB87671B7CD34700F4C5B3 /* CodeCoordinate.m in Sources */,
 				38EA10C31B5E374F004EE76E /* RavenClient.m in Sources */,
+				38FB876D1B7CD36600F4C5B3 /* ErrorClient.m in Sources */,
+				38FB87681B7CD34700F4C5B3 /* MessageEntity.m in Sources */,
 				38EA10C41B5E374F004EE76E /* RavenConfig.m in Sources */,
-				38F4CEA51B79D27400A8F464 /* GenericClient.m in Sources */,
-				38F4CE9C1B79D1A600A8F464 /* GenericClient+OutputHandling.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		38EA107E1B5E33A0004EE76E /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				38FB875C1B7CD2F300F4C5B3 /* GenericClient.m in Sources */,
+				38FB876E1B7CD36600F4C5B3 /* GenericClient+OutputHandling.m in Sources */,
+				38FB875B1B7CD2F300F4C5B3 /* ClientManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		38EA10851B5E33A0004EE76E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 38EA10761B5E33A0004EE76E /* GenericClient */;
-			targetProxy = 38EA10841B5E33A0004EE76E /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		38EA10891B5E33A0004EE76E /* Debug */ = {
@@ -466,38 +383,6 @@
 			};
 			name = Release;
 		};
-		38EA108F1B5E33A0004EE76E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = ErrorClientTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = GenericClientTests;
-			};
-			name = Debug;
-		};
-		38EA10901B5E33A0004EE76E /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = ErrorClientTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = GenericClientTests;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -515,15 +400,6 @@
 			buildConfigurations = (
 				38EA108C1B5E33A0004EE76E /* Debug */,
 				38EA108D1B5E33A0004EE76E /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		38EA108E1B5E33A0004EE76E /* Build configuration list for PBXNativeTarget "GenericClientTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				38EA108F1B5E33A0004EE76E /* Debug */,
-				38EA10901B5E33A0004EE76E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

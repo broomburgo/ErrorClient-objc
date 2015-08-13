@@ -131,18 +131,21 @@ typedef NSArray* __nullable(^ErrorHandlingBlock)(NSDictionary* __nonnull);
                               break;
                           case OutputTypeArray:
                               return [Result successWith:@[]];
+                          case OutputTypeString:
+                              return [Result successWith:@""];
+                          case OutputTypeNumber:
+                              return [Result successWith:@0];
                               break;
                       }
                   }
                   NSError* jsonError = nil;
-                  id outputObject = [NSJSONSerialization JSONObjectWithData:output options:0 error:&jsonError];
+                  id outputObject = [NSJSONSerialization JSONObjectWithData:output options:NSJSONReadingAllowFragments error:&jsonError];
                   if (jsonError != nil) {
                       return [Result failureWith:[ClientError withStatusCode:0
                                                                      headers:nil
                                                                 outputString:[[NSString alloc] initWithData:output encoding:NSUTF8StringEncoding]
-                                                                serverErrors:[@{}
-                                                                              key:@"json error" optional:[NSString stringWithFormat:@"%@\n%@", jsonError.localizedDescription, jsonError.userInfo]]
-                                                                networkError:nil]];
+                                                                serverErrors:nil
+                                                                networkError:jsonError]];
                   }
                   else {
                       return [Result successWith:outputObject];
@@ -159,6 +162,12 @@ typedef NSArray* __nullable(^ErrorHandlingBlock)(NSDictionary* __nonnull);
                          break;
                      case OutputTypeArray:
                          classToCheck = [NSArray class];
+                         break;
+                     case OutputTypeString:
+                         classToCheck = [NSString class];
+                         break;
+                     case OutputTypeNumber:
+                         classToCheck = [NSNumber class];
                          break;
                  }
                  if ([outputObject isKindOfClass:classToCheck]) {

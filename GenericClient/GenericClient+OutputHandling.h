@@ -3,7 +3,9 @@
 typedef NS_ENUM(NSInteger, OutputType) {
     OutputTypeEmpty,
     OutputTypeDictionary,
-    OutputTypeArray
+    OutputTypeArray,
+    OutputTypeString,
+    OutputTypeNumber
 };
 
 @class Result;
