@@ -109,6 +109,9 @@ typedef NSArray* __nullable(^ErrorHandlingBlock)(NSDictionary* __nonnull);
                /// empty output validation
                flatMapResult:^Result * __nonnull(ClientResponse* __nonnull clientResponse) {
                    NSData* output = clientResponse.output;
+                   
+                   NSLog(@"url: %@\nresponse: %@", clientResponse.HTTPResponse.URL, [[NSString alloc] initWithData:output encoding:NSUTF8StringEncoding]);
+                   
                    if (requiredNonEmpty && output.length == 0) {
                        return [Result failureWith:[ClientError withStatusCode:clientResponse.HTTPResponse.statusCode
                                                                       headers:clientResponse.HTTPResponse.allHeaderFields
