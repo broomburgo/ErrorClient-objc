@@ -20,12 +20,13 @@ typedef NS_ENUM(NSInteger, RequestParameterEncodingType) {
 @interface ClientError : NSObject <NSCopying>
 
 @property (nonatomic, readonly) NSInteger statusCode;
+@property (copy, nonatomic, readonly) NSString* __nullable urlString;
 @property (copy, nonatomic, readonly) NSDictionary* __nullable headers;
 @property (copy, nonatomic, readonly) NSString* __nullable outputString;
 @property (copy, nonatomic, readonly) NSDictionary* __nullable serverErrors;
 @property (copy, nonatomic, readonly) NSError* __nullable networkError;
 
-+ (ClientError* __nonnull)withStatusCode:(NSInteger)statusCode headers:(NSDictionary* __nullable)headers outputString:(NSString* __nullable)outputString serverErrors:(NSDictionary* __nullable)serverErrors networkError:(NSError* __nullable)networkError;
++ (ClientError* __nonnull)withStatusCode:(NSInteger)statusCode urlString:(NSString* __nullable)urlString headers:(NSDictionary* __nullable)headers outputString:(NSString* __nullable)outputString serverErrors:(NSDictionary* __nullable)serverErrors networkError:(NSError* __nullable)networkError;
 
 @end
 

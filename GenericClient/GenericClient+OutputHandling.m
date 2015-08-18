@@ -96,6 +96,7 @@ typedef NSArray* __nullable(^ErrorHandlingBlock)(NSDictionary* __nonnull);
                                                     }];
                         
                         return [Result failureWith:[ClientError withStatusCode:statusCode
+                                                                     urlString:clientResponse.HTTPResponse.URL.absoluteString
                                                                        headers:clientResponse.HTTPResponse.allHeaderFields
                                                                   outputString:nil
                                                                   serverErrors:optionalErrors.value
@@ -114,6 +115,7 @@ typedef NSArray* __nullable(^ErrorHandlingBlock)(NSDictionary* __nonnull);
                    
                    if (requiredNonEmpty && output.length == 0) {
                        return [Result failureWith:[ClientError withStatusCode:clientResponse.HTTPResponse.statusCode
+                                                                    urlString:clientResponse.HTTPResponse.URL.absoluteString
                                                                       headers:clientResponse.HTTPResponse.allHeaderFields
                                                                  outputString:@""
                                                                  serverErrors:nil
@@ -145,6 +147,7 @@ typedef NSArray* __nullable(^ErrorHandlingBlock)(NSDictionary* __nonnull);
                   id outputObject = [NSJSONSerialization JSONObjectWithData:output options:NSJSONReadingAllowFragments error:&jsonError];
                   if (jsonError != nil) {
                       return [Result failureWith:[ClientError withStatusCode:0
+                                                                   urlString:response.HTTPResponse.URL.absoluteString
                                                                      headers:nil
                                                                 outputString:[[NSString alloc] initWithData:output encoding:NSUTF8StringEncoding]
                                                                 serverErrors:nil
@@ -202,8 +205,9 @@ typedef NSArray* __nullable(^ErrorHandlingBlock)(NSDictionary* __nonnull);
                                                      }
                                                  }];
                      
-                     return [Result failureWith:[ClientError withStatusCode:0
-                                                                    headers:nil
+                     return [Result failureWith:[ClientError withStatusCode:response.HTTPResponse.statusCode
+                                                                  urlString:response.HTTPResponse.URL.absoluteString
+                                                                    headers:response.HTTPResponse.allHeaderFields
                                                                outputString:nil
                                                                serverErrors:[[@{}
                                                                               key:@"type error" optional:[NSString stringWithFormat:@"Object '%@' is not kind of class '%@'", outputObject, classToCheck]]
@@ -217,8 +221,9 @@ typedef NSArray* __nullable(^ErrorHandlingBlock)(NSDictionary* __nonnull);
                 if ([outputObject isKindOfClass:[NSDictionary class]] && errorHandlingBlock != nil) {
                     NSDictionary* outputErrors = errorsDictFromOutputDict((NSDictionary*)outputObject,errorHandlingBlock);
                     if (outputErrors.count > 0) {
-                        return [Result failureWith:[ClientError withStatusCode:0
-                                                                       headers:nil
+                        return [Result failureWith:[ClientError withStatusCode:response.HTTPResponse.statusCode
+                                                                     urlString:response.HTTPResponse.URL.absoluteString
+                                                                       headers:response.HTTPResponse.allHeaderFields
                                                                   outputString:nil
                                                                   serverErrors:outputErrors
                                                                   networkError:nil]];

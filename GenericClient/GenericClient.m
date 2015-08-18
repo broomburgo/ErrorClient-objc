@@ -75,8 +75,6 @@
     return response;
 }
 
-#pragma mark - NSCopying
-
 - (instancetype)copyWithZone:(NSZone *)zone {
     return [ClientResponse withHTTPResponse:self.HTTPResponse output:self.output];
 }
@@ -86,6 +84,7 @@
 @interface ClientError ()
 
 @property (nonatomic) NSInteger statusCode;
+@property (copy, nonatomic) NSString* __nullable urlString;
 @property (copy, nonatomic) NSDictionary* __nullable headers;
 @property (copy, nonatomic) NSString* __nullable outputString;
 @property (copy, nonatomic) NSDictionary* __nullable serverErrors;
@@ -95,9 +94,10 @@
 
 @implementation ClientError
 
-+ (ClientError*)withStatusCode:(NSInteger)statusCode headers:(NSDictionary*)headers outputString:(NSString*)outputString serverErrors:(NSDictionary*)serverErrors networkError:(NSError*)networkError {
++ (ClientError*)withStatusCode:(NSInteger)statusCode urlString:(NSString*)urlString headers:(NSDictionary*)headers outputString:(NSString*)outputString serverErrors:(NSDictionary*)serverErrors networkError:(NSError*)networkError {
     ClientError* error = [ClientError new];
     error.statusCode = statusCode;
+    error.urlString = urlString;
     error.headers = headers;
     error.outputString = outputString;
     error.serverErrors = serverErrors;
@@ -105,10 +105,8 @@
     return error;
 }
 
-#pragma mark - NSCopying
-
 - (instancetype)copyWithZone:(NSZone *)zone {
-    return [ClientError withStatusCode:self.statusCode headers:self.headers outputString:self.outputString serverErrors:self.serverErrors networkError:self.networkError];
+    return self;
 }
 
 @end
@@ -140,8 +138,6 @@
 + (RequestParameterEncoding* __nonnull)customWithEncodingBlock:(NSString* __nonnull(^ __nonnull)(NSDictionary* __nonnull))customEncodingBlock {
     return [RequestParameterEncoding withType:RequestParameterEncodingTypeCustom customWithEncodingBlock:customEncodingBlock];
 }
-
-#pragma mark - NSCopying
 
 - (instancetype)copyWithZone:(NSZone *)zone {
     return [RequestParameterEncoding withType:self.type customWithEncodingBlock:self.customEncodingBlock];
@@ -203,7 +199,7 @@
     NSString* parametersString = parameters != nil ? [self parametersStringWithParameters:parameters] : nil;
     
     if (parametersString.length > 0 && [method isEqualToString:@"GET"]) {
-        urlString = [urlString stringByAppendingString:parametersString];
+        urlString = [urlString stringByAppendingFormat:@"?%@", parametersString];
     }
     
     NSMutableURLRequest* m_request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]];
@@ -245,23 +241,24 @@
     }
     switch (self.parameterEncoding.type) {
         case RequestParameterEncodingTypeForm: {
-            NSString*(^percentEscapedStringForQueryString)(NSString*) = ^NSString*(NSString* string) {
-                NSString* legalCharactersToBeEscaped = @":/.?&=;+!@$()~";
-                return (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)string, NULL, (CFStringRef)legalCharactersToBeEscaped, CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding)));
-            };
-            return [@"?" stringByAppendingString:
-                    [[parameters
-                      reduceWithStartingElement:@[] reduceBlock:^NSArray*(NSArray* accumulator, id key, id object) {
-                          if ([key isKindOfClass:[NSString class]] == NO || [object isKindOfClass:[NSString class]] == NO) {
-                              return accumulator;
-                          }
-                          else {
-                              NSString* keyString = percentEscapedStringForQueryString((NSString*)key);
-                              NSString* objectString = percentEscapedStringForQueryString((NSString*)object);
-                              return [accumulator arrayByAddingObject:[NSString stringWithFormat:@"%@=%@", keyString, objectString]];
-                          }
-                      }]
-                     componentsJoinedByString:@"&"]];
+            return [GenericClient queryStringFromDict:parameters];
+//            NSString*(^percentEscapedStringForQueryString)(NSString*) = ^NSString*(NSString* string) {
+//                NSString* legalCharactersToBeEscaped = @":/.?&=;+!@$()~";
+//                return (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)string, NULL, (CFStringRef)legalCharactersToBeEscaped, CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding)));
+//            };
+//            return [@"?" stringByAppendingString:
+//                    [[parameters
+//                      reduceWithStartingElement:@[] reduceBlock:^NSArray*(NSArray* accumulator, id key, id object) {
+//                          if ([key isKindOfClass:[NSString class]] == NO || [object isKindOfClass:[NSString class]] == NO) {
+//                              return accumulator;
+//                          }
+//                          else {
+//                              NSString* keyString = percentEscapedStringForQueryString((NSString*)key);
+//                              NSString* objectString = percentEscapedStringForQueryString((NSString*)object);
+//                              return [accumulator arrayByAddingObject:[NSString stringWithFormat:@"%@=%@", keyString, objectString]];
+//                          }
+//                      }]
+//                     componentsJoinedByString:@"&"]];
             
             break;
         }
@@ -312,6 +309,7 @@
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
     [self.currentFuture failWith:[ClientError withStatusCode:self.currentResponse.statusCode
+                                                   urlString:connection.currentRequest.URL.absoluteString
                                                      headers:self.currentResponse.allHeaderFields
                                                 outputString:nil
                                                 serverErrors:nil
