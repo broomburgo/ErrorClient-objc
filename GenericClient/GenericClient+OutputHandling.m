@@ -62,7 +62,7 @@ typedef NSArray* __nullable(^ErrorHandlingBlock)(NSDictionary* __nonnull);
     return [[[[[[Result successWith:response]
                 
                 /// status code validation
-                flatMapResult:^Result * __nonnull(ClientResponse* __nonnull clientResponse) {
+                flatMap:^Result * __nonnull(ClientResponse* __nonnull clientResponse) {
                     NSInteger statusCode = clientResponse.HTTPResponse.statusCode;
                     if (statusCode < 200 || statusCode > 299) {
                         
@@ -71,12 +71,12 @@ typedef NSArray* __nullable(^ErrorHandlingBlock)(NSDictionary* __nonnull);
                                                        with:clientResponse.output]
                                                       
                                                       /// output into json
-                                                      flatMapOptional:^Optional * __nonnull(NSData* __nonnull outputData) {
+                                                      flatMap:^Optional * __nonnull(NSData* __nonnull outputData) {
                                                           return [Optional with:[NSJSONSerialization JSONObjectWithData:outputData options:NSJSONReadingAllowFragments error:nil]];
                                                       }]
                                                      
                                                      /// json to dict
-                                                     flatMapOptional:^Optional * __nonnull(id __nonnull outputObject) {
+                                                     flatMap:^Optional * __nonnull(id __nonnull outputObject) {
                                                          if ([outputObject isKindOfClass:[NSDictionary class]]) {
                                                              return [Optional with:outputObject];
                                                          }
@@ -86,7 +86,7 @@ typedef NSArray* __nullable(^ErrorHandlingBlock)(NSDictionary* __nonnull);
                                                      }]
                                                     
                                                     /// dict to errors
-                                                    flatMapOptional:^Optional * __nonnull(NSDictionary* __nonnull outputDict) {
+                                                    flatMap:^Optional * __nonnull(NSDictionary* __nonnull outputDict) {
                                                         if (errorHandlingBlock != nil) {
                                                             return [Optional with:errorsDictFromOutputDict(outputDict, errorHandlingBlock)];
                                                         }
@@ -108,7 +108,7 @@ typedef NSArray* __nullable(^ErrorHandlingBlock)(NSDictionary* __nonnull);
                 }]
                
                /// empty output validation
-               flatMapResult:^Result * __nonnull(ClientResponse* __nonnull clientResponse) {
+               flatMap:^Result * __nonnull(ClientResponse* __nonnull clientResponse) {
                    NSData* output = clientResponse.output;
                    
                    NSLog(@"url: %@\nresponse: %@", clientResponse.HTTPResponse.URL, [[NSString alloc] initWithData:output encoding:NSUTF8StringEncoding]);
@@ -127,7 +127,7 @@ typedef NSArray* __nullable(^ErrorHandlingBlock)(NSDictionary* __nonnull);
                }]
               
               /// json verification
-              flatMapResult:^Result * __nonnull(NSData* __nonnull output) {
+              flatMap:^Result * __nonnull(NSData* __nonnull output) {
                   if (output.length == 0) {
                       switch (requiredType) {
                           case OutputTypeEmpty:
@@ -159,7 +159,7 @@ typedef NSArray* __nullable(^ErrorHandlingBlock)(NSDictionary* __nonnull);
               }]
              
              /// output type verification
-             flatMapResult:^Result * __nonnull(id __nonnull outputObject) {
+             flatMap:^Result * __nonnull(id __nonnull outputObject) {
                  Class classToCheck = nil;
                  switch (requiredType) {
                      case OutputTypeEmpty:
@@ -186,7 +186,7 @@ typedef NSArray* __nullable(^ErrorHandlingBlock)(NSDictionary* __nonnull);
                                                    with:outputObject]
                                                   
                                                   /// output object to dict
-                                                  flatMapOptional:^Optional * __nonnull(id __nonnull outputObject) {
+                                                  flatMap:^Optional * __nonnull(id __nonnull outputObject) {
                                                       if ([outputObject isKindOfClass:[NSDictionary class]]) {
                                                           return [Optional with:outputObject];
                                                       }
@@ -196,7 +196,7 @@ typedef NSArray* __nullable(^ErrorHandlingBlock)(NSDictionary* __nonnull);
                                                   }]
                                                  
                                                  /// dict to errors
-                                                 flatMapOptional:^Optional * __nonnull(NSDictionary* __nonnull outputDict) {
+                                                 flatMap:^Optional * __nonnull(NSDictionary* __nonnull outputDict) {
                                                      if (errorHandlingBlock != nil) {
                                                          return [Optional with:errorsDictFromOutputDict(outputDict, errorHandlingBlock)];
                                                      }
@@ -217,7 +217,7 @@ typedef NSArray* __nullable(^ErrorHandlingBlock)(NSDictionary* __nonnull);
              }]
             
             /// output errors verification
-            flatMapResult:^Result * __nonnull(id __nonnull outputObject) {
+            flatMap:^Result * __nonnull(id __nonnull outputObject) {
                 if ([outputObject isKindOfClass:[NSDictionary class]] && errorHandlingBlock != nil) {
                     NSDictionary* outputErrors = errorsDictFromOutputDict((NSDictionary*)outputObject,errorHandlingBlock);
                     if (outputErrors.count > 0) {
