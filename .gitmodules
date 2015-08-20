@@ -1,6 +1,3 @@
-[submodule "Raven"]
-	path = Raven
-	url = https://github.com/getsentry/raven-objc.git
 [submodule "Tools"]
 	path = Tools
 	url = https://github.com/broomburgo/Tools-objc.git
