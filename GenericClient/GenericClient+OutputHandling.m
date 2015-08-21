@@ -30,7 +30,7 @@
 #pragma mark - NSCopying
 
 - (instancetype)copyWithZone:(NSZone *)zone {
-    return [ErrorPair withName:self.name message:self.message];
+    return self;
 }
 
 @end

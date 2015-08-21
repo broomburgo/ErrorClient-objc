@@ -76,7 +76,7 @@
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
-    return [ClientResponse withHTTPResponse:self.HTTPResponse output:self.output];
+    return self;
 }
 
 @end
@@ -140,7 +140,7 @@
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
-    return [RequestParameterEncoding withType:self.type customWithEncodingBlock:self.customEncodingBlock];
+    return self;
 }
 
 @end
@@ -151,7 +151,7 @@
 @property (copy, nonatomic) RequestParameterEncoding* parameterEncoding;
 @property (copy, nonatomic) NSDictionary* customHeaders;
 @property NSMutableData* m_dataBucket;
-@property (copy, nonatomic) Future* currentFuture;
+@property (nonatomic) Future* currentFuture;
 @property (nonatomic) NSURLConnection* currentConnection;
 @property (nonatomic) NSHTTPURLResponse* currentResponse;
 
