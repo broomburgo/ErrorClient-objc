@@ -1,5 +1,7 @@
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class Future;
 
 typedef NS_ENUM(NSInteger, RequestParameterEncodingType) {
@@ -10,10 +12,10 @@ typedef NS_ENUM(NSInteger, RequestParameterEncodingType) {
 
 @interface ClientResponse : NSObject <NSCopying>
 
-@property (copy, nonatomic, readonly) NSHTTPURLResponse* __nonnull HTTPResponse;
-@property (copy, nonatomic, readonly) NSData* __nonnull output;
+@property (copy, nonatomic, readonly) NSHTTPURLResponse* HTTPResponse;
+@property (copy, nonatomic, readonly) NSData* output;
 
-+ (ClientResponse* __nonnull)withHTTPResponse:(NSHTTPURLResponse* __nonnull)HTTPResponse output:(NSData* __nonnull)output;
++ (ClientResponse*)withHTTPResponse:(NSHTTPURLResponse*)HTTPResponse output:(NSData*)output;
 
 @end
 
@@ -26,7 +28,7 @@ typedef NS_ENUM(NSInteger, RequestParameterEncodingType) {
 @property (copy, nonatomic, readonly) NSDictionary* __nullable serverErrors;
 @property (copy, nonatomic, readonly) NSError* __nullable networkError;
 
-+ (ClientError* __nonnull)withStatusCode:(NSInteger)statusCode urlString:(NSString* __nullable)urlString headers:(NSDictionary* __nullable)headers outputString:(NSString* __nullable)outputString serverErrors:(NSDictionary* __nullable)serverErrors networkError:(NSError* __nullable)networkError;
++ (ClientError*)withStatusCode:(NSInteger)statusCode urlString:(NSString* __nullable)urlString headers:(NSDictionary* __nullable)headers outputString:(NSString* __nullable)outputString serverErrors:(NSDictionary* __nullable)serverErrors networkError:(NSError* __nullable)networkError;
 
 @end
 
@@ -34,28 +36,31 @@ typedef NS_ENUM(NSInteger, RequestParameterEncodingType) {
 
 @property (nonatomic, readonly) RequestParameterEncodingType type;
 
-+ (RequestParameterEncoding* __nonnull)JSON;
-+ (RequestParameterEncoding* __nonnull)form;
-+ (RequestParameterEncoding* __nonnull)customWithEncodingBlock:(NSString* __nonnull(^ __nonnull)(NSDictionary* __nonnull))customEncodingBlock;
++ (RequestParameterEncoding*)JSON;
++ (RequestParameterEncoding*)form;
++ (RequestParameterEncoding*)customWithEncodingBlock:(NSString*(^)(NSDictionary*))customEncodingBlock;
 
 @end
 
 @interface GenericClient : NSObject
 
-@property (copy, nonatomic, readonly) NSString* __nonnull urlString;
+@property (copy, nonatomic, readonly) NSString* urlString;
 
-+ (GenericClient* __nonnull)withURLString:(NSString* __nonnull)urlString;
-+ (GenericClient* __nonnull)withURLString:(NSString* __nonnull)urlString parameterEncoding:(RequestParameterEncoding* __nonnull)parameterEncoding;
-+ (GenericClient* __nonnull)withURLString:(NSString* __nonnull)urlStirng parameterEncoding:(RequestParameterEncoding* __nonnull)parameterEncoding customHeaders:(NSDictionary* __nullable)customHeaders;
-
-/// Future<ClientResponse,ClientError>
-- (Future* __nonnull)getRequestWithParameters:(NSDictionary* __nullable)parameters;
++ (GenericClient*)withURLString:(NSString*)urlString;
++ (GenericClient*)withURLString:(NSString*)urlString parameterEncoding:(RequestParameterEncoding*)parameterEncoding;
++ (GenericClient*)withURLString:(NSString*)urlStirng parameterEncoding:(RequestParameterEncoding*)parameterEncoding customHeaders:(NSDictionary* __nullable)customHeaders;
 
 /// Future<ClientResponse,ClientError>
-- (Future* __nonnull)postRequestWithParameters:(NSDictionary* __nullable)parameters;
+- (Future*)getRequestWithParameters:(NSDictionary* __nullable)parameters;
+
+/// Future<ClientResponse,ClientError>
+- (Future*)postRequestWithParameters:(NSDictionary* __nullable)parameters;
 
 #pragma mark - utility
 
-+ (NSString* __nonnull)queryStringFromDict:(NSDictionary* __nonnull)dict;
++ (NSString*)queryStringFromDict:(NSDictionary*)dict;
++ (NSDictionary*)basicAuthorizationHeaderWithUsername:(NSString*)username password:(NSString*)password;
 
 @end
+
+NS_ASSUME_NONNULL_END
