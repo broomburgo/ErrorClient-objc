@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		3805032C1B60D0A60062DE76 /* libTools.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 380503281B60D0890062DE76 /* libTools.a */; };
+		386EBEB21B95A17A00C678FE /* Client.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 38FB87731B7CD49200F4C5B3 /* Client.h */; };
+		386EBEB31B95A17A00C678FE /* ClientManager.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 38FB87571B7CD2F300F4C5B3 /* ClientManager.h */; };
+		386EBEB41B95A17A00C678FE /* GenericClient.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 38FB87591B7CD2F300F4C5B3 /* GenericClient.h */; };
+		386EBEB51B95A17A00C678FE /* CodeCoordinate.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 38FB87631B7CD34700F4C5B3 /* CodeCoordinate.h */; };
+		386EBEB61B95A17A00C678FE /* MessageEntity.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 38FB87651B7CD34700F4C5B3 /* MessageEntity.h */; };
+		386EBEB71B95A17A00C678FE /* ErrorClient.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 38FB87691B7CD36600F4C5B3 /* ErrorClient.h */; };
+		386EBEB81B95A17A00C678FE /* GenericClient+OutputHandling.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 38FB876B1B7CD36600F4C5B3 /* GenericClient+OutputHandling.h */; };
 		38EA10C31B5E374F004EE76E /* RavenClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EA10C01B5E374F004EE76E /* RavenClient.m */; };
 		38EA10C41B5E374F004EE76E /* RavenConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EA10C21B5E374F004EE76E /* RavenConfig.m */; };
 		38FB875B1B7CD2F300F4C5B3 /* ClientManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FB87581B7CD2F300F4C5B3 /* ClientManager.m */; };
@@ -33,6 +40,13 @@
 			remoteGlobalIDString = 38EA10431B5E1DAD004EE76E;
 			remoteInfo = ToolsTests;
 		};
+		386EBEC61B95A64A00C678FE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 380503221B60D0890062DE76 /* Tools.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 38EA10371B5E1DAD004EE76E;
+			remoteInfo = Tools;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -42,6 +56,13 @@
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
+				386EBEB21B95A17A00C678FE /* Client.h in CopyFiles */,
+				386EBEB31B95A17A00C678FE /* ClientManager.h in CopyFiles */,
+				386EBEB41B95A17A00C678FE /* GenericClient.h in CopyFiles */,
+				386EBEB51B95A17A00C678FE /* CodeCoordinate.h in CopyFiles */,
+				386EBEB61B95A17A00C678FE /* MessageEntity.h in CopyFiles */,
+				386EBEB71B95A17A00C678FE /* ErrorClient.h in CopyFiles */,
+				386EBEB81B95A17A00C678FE /* GenericClient+OutputHandling.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -190,6 +211,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				386EBEC71B95A64A00C678FE /* PBXTargetDependency */,
 			);
 			name = GenericClient;
 			productName = ErrorClient;
@@ -268,6 +290,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		386EBEC71B95A64A00C678FE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Tools;
+			targetProxy = 386EBEC61B95A64A00C678FE /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
 		38EA10891B5E33A0004EE76E /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -307,12 +337,13 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"$(SRCROOT)/**",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
+				USER_HEADER_SEARCH_PATHS = "\"${TARGET_BUILD_DIR}\"/**";
 			};
 			name = Debug;
 		};
@@ -348,11 +379,12 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"$(SRCROOT)/**",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
+				USER_HEADER_SEARCH_PATHS = "\"${TARGET_BUILD_DIR}\"/**";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
