@@ -102,7 +102,7 @@ static NSString* const kCustomUserIdUserDefaultsKey = @"kCustomUserIdUserDefault
         [ravenClient captureMessage:info.text
                               level:kRavenLogLevelDebugInfo
                     additionalExtra:info.info
-                     additionalTags:[@{}
+                     additionalTags:[[NSDictionary dictionary]
                                      key:kCustomTagsKey optional:info.standardTagsString]
                              method:coordinate ? coordinate.method : NULL
                                file:coordinate ? coordinate.file : NULL
@@ -120,7 +120,7 @@ static NSString* const kCustomUserIdUserDefaultsKey = @"kCustomUserIdUserDefault
         [ravenClient captureMessage:warning.text
                               level:kRavenLogLevelDebugWarning
                     additionalExtra:warning.info
-                     additionalTags:[@{}
+                     additionalTags:[[NSDictionary dictionary]
                                      key:kCustomTagsKey optional:warning.standardTagsString]
                              method:coordinate ? coordinate.method : NULL
                                file:coordinate ? coordinate.file : NULL
@@ -138,7 +138,7 @@ static NSString* const kCustomUserIdUserDefaultsKey = @"kCustomUserIdUserDefault
         [ravenClient captureMessage:error.text
                               level:kRavenLogLevelDebugError
                     additionalExtra:error.info
-                     additionalTags:[@{}
+                     additionalTags:[[NSDictionary dictionary]
                                      key:kCustomTagsKey optional:error.standardTagsString]
                              method:coordinate ? coordinate.method : NULL
                                file:coordinate ? coordinate.file : NULL

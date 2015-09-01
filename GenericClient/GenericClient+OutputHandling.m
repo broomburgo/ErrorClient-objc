@@ -54,7 +54,7 @@ typedef NSArray* __nullable(^ErrorHandlingBlock)(NSDictionary* __nonnull);
         }
         return [errors
                 mapToDictionary:^NSDictionary* (ErrorPair* pair) {
-                    return [@{}
+                    return [[NSDictionary dictionary]
                             key:pair.name optional:pair.message ?: @""];
                 }];
     };
@@ -132,10 +132,10 @@ typedef NSArray* __nullable(^ErrorHandlingBlock)(NSDictionary* __nonnull);
                       switch (requiredType) {
                           case OutputTypeEmpty:
                           case OutputTypeDictionary:
-                              return [Result successWith:@{}];
+                              return [Result successWith:[NSDictionary dictionary]];
                               break;
                           case OutputTypeArray:
-                              return [Result successWith:@[]];
+                              return [Result successWith:[NSArray array]];
                           case OutputTypeString:
                               return [Result successWith:@""];
                           case OutputTypeNumber:
@@ -209,7 +209,7 @@ typedef NSArray* __nullable(^ErrorHandlingBlock)(NSDictionary* __nonnull);
                                                                   urlString:response.HTTPResponse.URL.absoluteString
                                                                     headers:response.HTTPResponse.allHeaderFields
                                                                outputString:nil
-                                                               serverErrors:[[@{}
+                                                               serverErrors:[[[NSDictionary dictionary]
                                                                               key:@"type error" optional:[NSString stringWithFormat:@"Object '%@' is not kind of class '%@'", outputObject, classToCheck]]
                                                                              optionalDict:optionalErrors.value]
                                                                networkError:nil]];

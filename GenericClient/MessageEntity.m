@@ -40,7 +40,7 @@ NSString* const kStandardTagsStringSeparator = @"|";
 }
 
 - (NSData*)requestBody {
-    return [NSJSONSerialization dataWithJSONObject:[[[@{}
+    return [NSJSONSerialization dataWithJSONObject:[[[[NSDictionary dictionary]
                                                       key:@"text" optional:self.text]
                                                      key:@"tags" optional:self.standardTagsString]
                                                     optionalDict:self.info]
