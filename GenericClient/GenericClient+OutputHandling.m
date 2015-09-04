@@ -1,6 +1,6 @@
 #import "GenericClient+OutputHandling.h"
 #import "MessageEntity.h"
-#import "Tools.h"
+#import <Tools/Tools.h>
 
 @interface ErrorPair ()
 

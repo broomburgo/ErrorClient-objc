@@ -2,6 +2,7 @@
 
 @class CodeCoordinate;
 @class MessageEntity;
+@class ExceptionEntity;
 
 extern NSString* const kErrorServerURLStringUserDefaultsKey;
 extern NSString* const kCustomTagsKey;
@@ -15,5 +16,6 @@ extern NSString* const kCustomTagsKey;
 + (void)inCoordinate:(CodeCoordinate*)coordinate sendWarning:(MessageEntity*)warning;
 + (void)sendError:(MessageEntity*)error;
 + (void)inCoordinate:(CodeCoordinate*)coordinate sendError:(MessageEntity*)error;
++ (void)sendException:(ExceptionEntity*)exceptionEntity;
 
 @end

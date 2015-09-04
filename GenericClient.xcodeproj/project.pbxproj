@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3805032C1B60D0A60062DE76 /* libTools.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 380503281B60D0890062DE76 /* libTools.a */; };
 		386EBEB21B95A17A00C678FE /* Client.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 38FB87731B7CD49200F4C5B3 /* Client.h */; };
 		386EBEB31B95A17A00C678FE /* ClientManager.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 38FB87571B7CD2F300F4C5B3 /* ClientManager.h */; };
 		386EBEB41B95A17A00C678FE /* GenericClient.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 38FB87591B7CD2F300F4C5B3 /* GenericClient.h */; };
@@ -15,6 +14,9 @@
 		386EBEB61B95A17A00C678FE /* MessageEntity.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 38FB87651B7CD34700F4C5B3 /* MessageEntity.h */; };
 		386EBEB71B95A17A00C678FE /* MessageClient.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 38FB87691B7CD36600F4C5B3 /* MessageClient.h */; };
 		386EBEB81B95A17A00C678FE /* GenericClient+OutputHandling.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 38FB876B1B7CD36600F4C5B3 /* GenericClient+OutputHandling.h */; };
+		38DC3B931B999C9F00D7998A /* ExceptionEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DC3B921B999C9F00D7998A /* ExceptionEntity.m */; };
+		38DC3B951B99A04200D7998A /* libTools.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 380503281B60D0890062DE76 /* libTools.a */; };
+		38DC3B961B99A1D300D7998A /* ExceptionEntity.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 38DC3B911B999C9F00D7998A /* ExceptionEntity.h */; };
 		38EA10C31B5E374F004EE76E /* RavenClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EA10C01B5E374F004EE76E /* RavenClient.m */; };
 		38EA10C41B5E374F004EE76E /* RavenConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EA10C21B5E374F004EE76E /* RavenConfig.m */; };
 		38FB875B1B7CD2F300F4C5B3 /* ClientManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FB87581B7CD2F300F4C5B3 /* ClientManager.m */; };
@@ -40,13 +42,6 @@
 			remoteGlobalIDString = 38EA10431B5E1DAD004EE76E;
 			remoteInfo = ToolsTests;
 		};
-		386EBEC61B95A64A00C678FE /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 380503221B60D0890062DE76 /* Tools.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 38EA10371B5E1DAD004EE76E;
-			remoteInfo = Tools;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -56,6 +51,7 @@
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
+				38DC3B961B99A1D300D7998A /* ExceptionEntity.h in CopyFiles */,
 				386EBEB21B95A17A00C678FE /* Client.h in CopyFiles */,
 				386EBEB31B95A17A00C678FE /* ClientManager.h in CopyFiles */,
 				386EBEB41B95A17A00C678FE /* GenericClient.h in CopyFiles */,
@@ -70,6 +66,8 @@
 
 /* Begin PBXFileReference section */
 		380503221B60D0890062DE76 /* Tools.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Tools.xcodeproj; path = Tools/Tools.xcodeproj; sourceTree = "<group>"; };
+		38DC3B911B999C9F00D7998A /* ExceptionEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExceptionEntity.h; path = GenericClient/ExceptionEntity.h; sourceTree = "<group>"; };
+		38DC3B921B999C9F00D7998A /* ExceptionEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ExceptionEntity.m; path = GenericClient/ExceptionEntity.m; sourceTree = "<group>"; };
 		38EA10771B5E33A0004EE76E /* libGenericClient.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libGenericClient.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		38EA10BD1B5E374F004EE76E /* Raven.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Raven.h; path = Raven/Raven/Raven.h; sourceTree = "<group>"; };
 		38EA10BE1B5E374F004EE76E /* RavenClient_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RavenClient_Private.h; path = Raven/Raven/RavenClient_Private.h; sourceTree = "<group>"; };
@@ -97,7 +95,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3805032C1B60D0A60062DE76 /* libTools.a in Frameworks */,
+				38DC3B951B99A04200D7998A /* libTools.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -193,6 +191,8 @@
 				38FB87641B7CD34700F4C5B3 /* CodeCoordinate.m */,
 				38FB87651B7CD34700F4C5B3 /* MessageEntity.h */,
 				38FB87661B7CD34700F4C5B3 /* MessageEntity.m */,
+				38DC3B911B999C9F00D7998A /* ExceptionEntity.h */,
+				38DC3B921B999C9F00D7998A /* ExceptionEntity.m */,
 			);
 			name = Messages;
 			sourceTree = "<group>";
@@ -211,7 +211,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				386EBEC71B95A64A00C678FE /* PBXTargetDependency */,
 			);
 			name = GenericClient;
 			productName = ErrorClient;
@@ -277,6 +276,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				38DC3B931B999C9F00D7998A /* ExceptionEntity.m in Sources */,
 				38FB87671B7CD34700F4C5B3 /* CodeCoordinate.m in Sources */,
 				38EA10C31B5E374F004EE76E /* RavenClient.m in Sources */,
 				38FB876D1B7CD36600F4C5B3 /* MessageClient.m in Sources */,
@@ -289,14 +289,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		386EBEC71B95A64A00C678FE /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = Tools;
-			targetProxy = 386EBEC61B95A64A00C678FE /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		38EA10891B5E33A0004EE76E /* Debug */ = {
@@ -337,13 +329,14 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"\"${TARGET_BUILD_DIR}\"/**",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
-				USER_HEADER_SEARCH_PATHS = "\"${TARGET_BUILD_DIR}\"/**";
+				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
 		};
@@ -379,12 +372,13 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"\"${TARGET_BUILD_DIR}\"/**",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
-				USER_HEADER_SEARCH_PATHS = "\"${TARGET_BUILD_DIR}\"/**";
+				USER_HEADER_SEARCH_PATHS = "";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

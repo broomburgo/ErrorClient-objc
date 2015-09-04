@@ -1,16 +1,16 @@
-#import "MessageEntity.h"
+#import "ExceptionEntity.h"
 
 #import <Tools/Tools.h>
 
-@interface MessageEntity ()
+@interface ExceptionEntity ()
 
-@property (copy, nonatomic) NSString* text;
+@property (copy, nonatomic) NSException* exception;
 @property (copy, nonatomic) NSArray* tags;
 @property (copy, nonatomic) NSDictionary* info;
 
 @end
 
-@implementation MessageEntity
+@implementation ExceptionEntity
 
 - (instancetype)init {
     self = [super init];
@@ -21,17 +21,17 @@
     return self;
 }
 
-+ (MessageEntity* __nonnull)withText:(NSString* __nonnull)text {
-    return [MessageEntity withText:text tags:nil info:nil];
++ (ExceptionEntity* __nonnull)withException:(NSException * __nonnull)exception {
+    return [ExceptionEntity withException:exception tags:nil info:nil];
 }
 
-+ (MessageEntity* __nonnull)withText:(NSString* __nonnull)text tags:(NSArray* __nullable)tags {
-    return [MessageEntity withText:text tags:tags info:nil];
++ (ExceptionEntity* __nonnull)withException:(NSException * __nonnull)exception tags:(NSArray * __nullable)tags {
+    return [ExceptionEntity withException:exception tags:tags info:nil];
 }
 
-+ (MessageEntity* __nonnull)withText:(NSString* __nonnull)text tags:(NSArray* __nullable)tags info:(NSDictionary* __nullable)info {
-    MessageEntity* entity = [MessageEntity new];
-    entity.text = text;
++ (ExceptionEntity* __nonnull)withException:(NSException * __nonnull)exception tags:(NSArray * __nullable)tags info:(NSDictionary * __nullable)info {
+    ExceptionEntity* entity = [ExceptionEntity new];
+    entity.exception = exception;
     entity.tags = [Tools JSONValidatedArray:tags];
     entity.info = [Tools JSONValidatedDictionary:info];
     return entity;
@@ -39,7 +39,7 @@
 
 - (NSData*)requestBody {
     return [NSJSONSerialization dataWithJSONObject:[[[[NSDictionary dictionary]
-                                                      key:@"text" optional:self.text]
+                                                      key:@"exception" optional:[NSString stringWithFormat:@"%@", self.exception]]
                                                      key:@"tags" optional:self.standardTagsString]
                                                     optionalDict:self.info]
                                            options:0

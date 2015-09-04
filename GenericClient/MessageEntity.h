@@ -1,7 +1,5 @@
 #import <Foundation/Foundation.h>
 
-extern NSString* __nonnull const kStandardTagsStringSeparator;
-
 @interface MessageEntity : NSObject
 
 @property (copy, nonatomic, readonly) NSString* __nonnull text;

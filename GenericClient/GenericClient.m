@@ -1,6 +1,6 @@
 #import "GenericClient.h"
-#import "Tools.h"
-#import "Future_Internal.h"
+#import <Tools/Tools.h>
+#import <Tools/Future_internal.h>
 
 @interface QueryStringPair : NSObject
 

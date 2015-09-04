@@ -1,10 +1,11 @@
 #import "MessageClient.h"
 #import <UIKit/UIKit.h>
+#import <Tools/Tools.h>
 
-#import "Tools.h"
 #import "RavenClient.h"
 
 #import "MessageEntity.h"
+#import "ExceptionEntity.h"
 #import "CodeCoordinate.h"
 
 #import <execinfo.h>
@@ -139,10 +140,23 @@ static NSString* const kCustomUserIdUserDefaultsKey = @"kCustomUserIdUserDefault
                               level:kRavenLogLevelDebugError
                     additionalExtra:error.info
                      additionalTags:[[NSDictionary dictionary]
-                                     key:kCustomTagsKey optional:error.standardTagsString]
+                                     key:kCustomTagsKey
+                                     optional:error.standardTagsString]
                              method:coordinate ? coordinate.method : NULL
                                file:coordinate ? coordinate.file : NULL
                                line:coordinate ? coordinate.line : 0];
+    }
+}
+
++ (void)sendException:(ExceptionEntity*)exceptionEntity {
+    RavenClient* ravenClient = [RavenClient sharedClient];
+    if (ravenClient != nil) {
+        [[RavenClient sharedClient] captureException:exceptionEntity.exception
+                                     additionalExtra:exceptionEntity.info
+                                      additionalTags:[[NSDictionary dictionary]
+                                                      key:kCustomTagsKey
+                                                      optional:exceptionEntity.standardTagsString]
+                                             sendNow:YES];
     }
 }
 
