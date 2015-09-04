@@ -104,7 +104,7 @@ static NSString* const kCustomUserIdUserDefaultsKey = @"kCustomUserIdUserDefault
                               level:kRavenLogLevelDebugInfo
                     additionalExtra:info.info
                      additionalTags:[[NSDictionary dictionary]
-                                     key:kCustomTagsKey optional:info.standardTagsString]
+                                     key:kCustomTagsKey optional:[self tagsStringWithTags:info.tags]]
                              method:coordinate ? coordinate.method : NULL
                                file:coordinate ? coordinate.file : NULL
                                line:coordinate ? coordinate.line : 0];
@@ -122,7 +122,7 @@ static NSString* const kCustomUserIdUserDefaultsKey = @"kCustomUserIdUserDefault
                               level:kRavenLogLevelDebugWarning
                     additionalExtra:warning.info
                      additionalTags:[[NSDictionary dictionary]
-                                     key:kCustomTagsKey optional:warning.standardTagsString]
+                                     key:kCustomTagsKey optional:[self tagsStringWithTags:warning.tags]]
                              method:coordinate ? coordinate.method : NULL
                                file:coordinate ? coordinate.file : NULL
                                line:coordinate ? coordinate.line : 0];
@@ -141,7 +141,7 @@ static NSString* const kCustomUserIdUserDefaultsKey = @"kCustomUserIdUserDefault
                     additionalExtra:error.info
                      additionalTags:[[NSDictionary dictionary]
                                      key:kCustomTagsKey
-                                     optional:error.standardTagsString]
+                                     optional:[self tagsStringWithTags:error.tags]]
                              method:coordinate ? coordinate.method : NULL
                                file:coordinate ? coordinate.file : NULL
                                line:coordinate ? coordinate.line : 0];
@@ -155,10 +155,27 @@ static NSString* const kCustomUserIdUserDefaultsKey = @"kCustomUserIdUserDefault
                                      additionalExtra:exceptionEntity.info
                                       additionalTags:[[NSDictionary dictionary]
                                                       key:kCustomTagsKey
-                                                      optional:exceptionEntity.standardTagsString]
+                                                      optional:[self tagsStringWithTags:exceptionEntity.tags]]
                                              sendNow:YES];
     }
 }
+
+/// utilities
+
++ (NSString*)tagsStringWithTags:(NSArray*)tags {
+    if (tags.count == 0) {
+        return nil;
+    }
+    NSString* separator = @"|";
+    return [[tags
+             reduceWithStartingElement:@"" reduceBlock:^id(id accumulator, id object) {
+                 return [accumulator stringByAppendingFormat:@"%@%@", object, separator];
+             }]
+            stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:separator]];
+}
+
+
+/// exception handling
 
 + (void)backtraceAddresses:(NSArray*__autoreleasing*)addresses symbols:(NSArray*__autoreleasing*)symbols {
     void *backtraceFrames[128];
