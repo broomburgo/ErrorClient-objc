@@ -6,7 +6,7 @@
 extern NSString* const kErrorServerURLStringUserDefaultsKey;
 extern NSString* const kCustomTagsKey;
 
-@interface ErrorClient : NSObject
+@interface MessageClient : NSObject
 
 + (void)setupExceptionHandler;
 + (void)sendInfo:(MessageEntity*)info;

@@ -1,4 +1,4 @@
-#import "ErrorClient.h"
+#import "MessageClient.h"
 #import <UIKit/UIKit.h>
 
 #import "Tools.h"
@@ -47,10 +47,10 @@ static NSString* const kCustomUserIdUserDefaultsKey = @"kCustomUserIdUserDefault
 
 @end
 
-@implementation ErrorClient
+@implementation MessageClient
 
 + (void)initialize {
-    if (self == [ErrorClient self]) {
+    if (self == [MessageClient self]) {
         RavenClient* sharedClient = [RavenClient clientWithDSN:[[NSUserDefaults standardUserDefaults] stringForKey:kErrorServerURLStringUserDefaultsKey]];
         NSString* identifierForVendor = [UIDevice currentDevice].identifierForVendor.UUIDString;
         if (identifierForVendor.length > 0) {
@@ -180,7 +180,7 @@ static NSString* const kCustomUserIdUserDefaultsKey = @"kCustomUserIdUserDefault
 void signalHandler(int signal, siginfo_t *info, void *context) {
     NSArray* addresses = nil;
     NSArray* symbols = nil;
-    [ErrorClient backtraceAddresses:&addresses symbols:&symbols];
+    [MessageClient backtraceAddresses:&addresses symbols:&symbols];
     [[RavenClient sharedClient] captureException:[SignalException exceptionWithSignal:signal
                                                              callStackReturnAddresses:addresses
                                                                      callStackSymbols:symbols]

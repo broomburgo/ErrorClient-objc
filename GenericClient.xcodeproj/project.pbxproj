@@ -13,7 +13,7 @@
 		386EBEB41B95A17A00C678FE /* GenericClient.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 38FB87591B7CD2F300F4C5B3 /* GenericClient.h */; };
 		386EBEB51B95A17A00C678FE /* CodeCoordinate.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 38FB87631B7CD34700F4C5B3 /* CodeCoordinate.h */; };
 		386EBEB61B95A17A00C678FE /* MessageEntity.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 38FB87651B7CD34700F4C5B3 /* MessageEntity.h */; };
-		386EBEB71B95A17A00C678FE /* ErrorClient.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 38FB87691B7CD36600F4C5B3 /* ErrorClient.h */; };
+		386EBEB71B95A17A00C678FE /* MessageClient.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 38FB87691B7CD36600F4C5B3 /* MessageClient.h */; };
 		386EBEB81B95A17A00C678FE /* GenericClient+OutputHandling.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 38FB876B1B7CD36600F4C5B3 /* GenericClient+OutputHandling.h */; };
 		38EA10C31B5E374F004EE76E /* RavenClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EA10C01B5E374F004EE76E /* RavenClient.m */; };
 		38EA10C41B5E374F004EE76E /* RavenConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EA10C21B5E374F004EE76E /* RavenConfig.m */; };
@@ -21,7 +21,7 @@
 		38FB875C1B7CD2F300F4C5B3 /* GenericClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FB875A1B7CD2F300F4C5B3 /* GenericClient.m */; };
 		38FB87671B7CD34700F4C5B3 /* CodeCoordinate.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FB87641B7CD34700F4C5B3 /* CodeCoordinate.m */; };
 		38FB87681B7CD34700F4C5B3 /* MessageEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FB87661B7CD34700F4C5B3 /* MessageEntity.m */; };
-		38FB876D1B7CD36600F4C5B3 /* ErrorClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FB876A1B7CD36600F4C5B3 /* ErrorClient.m */; };
+		38FB876D1B7CD36600F4C5B3 /* MessageClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FB876A1B7CD36600F4C5B3 /* MessageClient.m */; };
 		38FB876E1B7CD36600F4C5B3 /* GenericClient+OutputHandling.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FB876C1B7CD36600F4C5B3 /* GenericClient+OutputHandling.m */; };
 /* End PBXBuildFile section */
 
@@ -61,7 +61,7 @@
 				386EBEB41B95A17A00C678FE /* GenericClient.h in CopyFiles */,
 				386EBEB51B95A17A00C678FE /* CodeCoordinate.h in CopyFiles */,
 				386EBEB61B95A17A00C678FE /* MessageEntity.h in CopyFiles */,
-				386EBEB71B95A17A00C678FE /* ErrorClient.h in CopyFiles */,
+				386EBEB71B95A17A00C678FE /* MessageClient.h in CopyFiles */,
 				386EBEB81B95A17A00C678FE /* GenericClient+OutputHandling.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -85,8 +85,8 @@
 		38FB87641B7CD34700F4C5B3 /* CodeCoordinate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CodeCoordinate.m; path = GenericClient/CodeCoordinate.m; sourceTree = "<group>"; };
 		38FB87651B7CD34700F4C5B3 /* MessageEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageEntity.h; path = GenericClient/MessageEntity.h; sourceTree = "<group>"; };
 		38FB87661B7CD34700F4C5B3 /* MessageEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MessageEntity.m; path = GenericClient/MessageEntity.m; sourceTree = "<group>"; };
-		38FB87691B7CD36600F4C5B3 /* ErrorClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ErrorClient.h; path = GenericClient/ErrorClient.h; sourceTree = SOURCE_ROOT; };
-		38FB876A1B7CD36600F4C5B3 /* ErrorClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ErrorClient.m; path = GenericClient/ErrorClient.m; sourceTree = SOURCE_ROOT; };
+		38FB87691B7CD36600F4C5B3 /* MessageClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageClient.h; path = GenericClient/MessageClient.h; sourceTree = SOURCE_ROOT; };
+		38FB876A1B7CD36600F4C5B3 /* MessageClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MessageClient.m; path = GenericClient/MessageClient.m; sourceTree = SOURCE_ROOT; };
 		38FB876B1B7CD36600F4C5B3 /* GenericClient+OutputHandling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "GenericClient+OutputHandling.h"; path = "GenericClient/GenericClient+OutputHandling.h"; sourceTree = SOURCE_ROOT; };
 		38FB876C1B7CD36600F4C5B3 /* GenericClient+OutputHandling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "GenericClient+OutputHandling.m"; path = "GenericClient/GenericClient+OutputHandling.m"; sourceTree = SOURCE_ROOT; };
 		38FB87731B7CD49200F4C5B3 /* Client.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Client.h; path = GenericClient/Client.h; sourceTree = "<group>"; };
@@ -136,8 +136,6 @@
 		38EA10791B5E33A0004EE76E /* Outputs */ = {
 			isa = PBXGroup;
 			children = (
-				38FB87691B7CD36600F4C5B3 /* ErrorClient.h */,
-				38FB876A1B7CD36600F4C5B3 /* ErrorClient.m */,
 				38FB876B1B7CD36600F4C5B3 /* GenericClient+OutputHandling.h */,
 				38FB876C1B7CD36600F4C5B3 /* GenericClient+OutputHandling.m */,
 			);
@@ -189,6 +187,8 @@
 		38F4CEA81B79D2A700A8F464 /* Messages */ = {
 			isa = PBXGroup;
 			children = (
+				38FB87691B7CD36600F4C5B3 /* MessageClient.h */,
+				38FB876A1B7CD36600F4C5B3 /* MessageClient.m */,
 				38FB87631B7CD34700F4C5B3 /* CodeCoordinate.h */,
 				38FB87641B7CD34700F4C5B3 /* CodeCoordinate.m */,
 				38FB87651B7CD34700F4C5B3 /* MessageEntity.h */,
@@ -279,7 +279,7 @@
 			files = (
 				38FB87671B7CD34700F4C5B3 /* CodeCoordinate.m in Sources */,
 				38EA10C31B5E374F004EE76E /* RavenClient.m in Sources */,
-				38FB876D1B7CD36600F4C5B3 /* ErrorClient.m in Sources */,
+				38FB876D1B7CD36600F4C5B3 /* MessageClient.m in Sources */,
 				38FB87681B7CD34700F4C5B3 /* MessageEntity.m in Sources */,
 				38EA10C41B5E374F004EE76E /* RavenConfig.m in Sources */,
 				38FB875C1B7CD2F300F4C5B3 /* GenericClient.m in Sources */,
