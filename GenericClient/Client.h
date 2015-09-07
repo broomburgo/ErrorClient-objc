@@ -4,6 +4,5 @@
 #import "CodeCoordinate.h"
 #import "MessageEntity.h"
 #import "ExceptionEntity.h"
-#import "MessageClient.h"
 #import "GenericClient+OutputHandling.h"
 
