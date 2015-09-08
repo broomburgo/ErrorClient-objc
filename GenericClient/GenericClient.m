@@ -105,6 +105,17 @@
     return error;
 }
 
+- (NSString*)description {
+    return [NSString stringWithFormat:@"ClientError: %@\nurl: %@\nstatus code: %d\nheaders: %@\noutput: %@\nserver errors: %@\nnetwork error: %@",
+            self,
+            self.urlString,
+            (int)self.statusCode,
+            self.headers,
+            self.outputString,
+            self.serverErrors,
+            self.networkError];
+}
+
 - (instancetype)copyWithZone:(NSZone *)zone {
     return self;
 }
