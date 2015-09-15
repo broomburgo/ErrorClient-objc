@@ -105,6 +105,22 @@
     return error;
 }
 
+- (NSDictionary*)keyedDescription {
+    return [[[[[[[NSDictionary dictionary]
+                 key:@"url"
+                 optional:self.urlString]
+                key:@"status code"
+                optional:@(self.statusCode)]
+               key:@"headers"
+               optional:self.headers]
+              key:@"output"
+              optional:self.outputString]
+             key:@"server errors"
+             optional:self.serverErrors]
+            key:@"network error"
+            optional:self.networkError.localizedDescription];
+}
+
 - (NSString*)description {
     return [NSString stringWithFormat:@"url: %@\nstatus code: %d\nheaders: %@\noutput: %@\nserver errors: %@\nnetwork error: %@",
             self.urlString,

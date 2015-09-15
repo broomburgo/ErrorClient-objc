@@ -28,6 +28,8 @@ typedef NS_ENUM(NSInteger, RequestParameterEncodingType) {
 @property (copy, nonatomic, readonly) NSDictionary* __nullable serverErrors;
 @property (copy, nonatomic, readonly) NSError* __nullable networkError;
 
+@property (nonatomic, readonly) NSDictionary* keyedDescription;
+
 + (ClientError*)withStatusCode:(NSInteger)statusCode urlString:(NSString* __nullable)urlString headers:(NSDictionary* __nullable)headers outputString:(NSString* __nullable)outputString serverErrors:(NSDictionary* __nullable)serverErrors networkError:(NSError* __nullable)networkError;
 
 @end
