@@ -97,7 +97,15 @@ typedef NSArray* __nullable(^ErrorHandlingBlock)(NSDictionary* __nonnull);
                         return [Result failureWith:[ClientError withStatusCode:statusCode
                                                                      urlString:clientResponse.HTTPResponse.URL.absoluteString
                                                                        headers:clientResponse.HTTPResponse.allHeaderFields
-                                                                  outputString:nil
+                                                                  outputString:[[[Optional
+                                                                                  with:clientResponse.output]
+                                                                                 flatMap:^Optional*(NSData* output) {
+                                                                                     return [Optional
+                                                                                             with:[[NSString alloc]
+                                                                                                   initWithData:output
+                                                                                                   encoding:NSUTF8StringEncoding]];
+                                                                                 }]
+                                                                                value]
                                                                   serverErrors:optionalErrors.value
                                                                   networkError:nil]];
                     }

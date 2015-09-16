@@ -347,7 +347,15 @@
     [self.currentFuture failWith:[ClientError withStatusCode:self.currentResponse.statusCode
                                                    urlString:connection.currentRequest.URL.absoluteString
                                                      headers:self.currentResponse.allHeaderFields
-                                                outputString:nil
+                                                outputString:[[[Optional
+                                                                with:[self.m_dataBucket copy]]
+                                                               flatMap:^Optional*(NSData* responseData) {
+                                                                   return [Optional
+                                                                           with:[[NSString alloc]
+                                                                                 initWithData:responseData
+                                                                                 encoding:NSUTF8StringEncoding]];
+                                                               }]
+                                                              value]
                                                 serverErrors:nil
                                                 networkError:error]];
     [self clean];
