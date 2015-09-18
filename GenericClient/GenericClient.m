@@ -355,7 +355,7 @@
                                                                                  initWithData:responseData
                                                                                  encoding:NSUTF8StringEncoding]];
                                                                }]
-                                                              value]
+                                                              get]
                                                 serverErrors:nil
                                                 networkError:error]];
     [self clean];
