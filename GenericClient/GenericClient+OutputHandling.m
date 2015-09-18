@@ -105,8 +105,8 @@ typedef NSArray* __nullable(^ErrorHandlingBlock)(NSDictionary* __nonnull);
                                                                                                    initWithData:output
                                                                                                    encoding:NSUTF8StringEncoding]];
                                                                                  }]
-                                                                                value]
-                                                                  serverErrors:optionalErrors.value
+                                                                                get]
+                                                                  serverErrors:optionalErrors.get
                                                                   networkError:nil]];
                     }
                     else {
@@ -218,7 +218,7 @@ typedef NSArray* __nullable(^ErrorHandlingBlock)(NSDictionary* __nonnull);
                                                                outputString:nil
                                                                serverErrors:[[[NSDictionary dictionary]
                                                                               key:@"type error" optional:[NSString stringWithFormat:@"Object '%@' is not kind of class '%@'", outputObject, classToCheck]]
-                                                                             optionalDict:optionalErrors.value]
+                                                                             optionalDict:optionalErrors.get]
                                                                networkError:nil]];
                  }
              }]
