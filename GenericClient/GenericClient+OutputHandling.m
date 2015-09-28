@@ -26,7 +26,11 @@ NS_ASSUME_NONNULL_END
 
 - (NSDictionary*)keyValuePair
 {
-  return @{self.name : self.message};
+  return [[Optional
+           with:[[NSDictionary dictionary]
+                 key:self.name
+                 optional:self.message]]
+          getOrElse:^id{ return @{}; }];
 }
 
 - (NSString*)description
@@ -36,9 +40,7 @@ NS_ASSUME_NONNULL_END
 
 - (instancetype)copyWithZone:(NSZone *)zone
 {
-  return [ErrorPair
-          withName:self.name
-          message:self.message];
+  return self;
 }
 
 @end
@@ -75,7 +77,6 @@ typedef NSArray*(^ErrorHandlingBlock)(NSDictionary*);
                 NSInteger statusCode = clientResponse.HTTPResponse.statusCode;
                 if (statusCode < 200 || statusCode > 299)
                 {
-                  
                   /// check if there's any error
                   Optional* optionalErrors = [[[[Optional
                                                  with:clientResponse.output]
@@ -124,8 +125,7 @@ typedef NSArray*(^ErrorHandlingBlock)(NSDictionary*);
               }]
              
              /// empty output validation
-             flatMap:^Either*(ClientResponse* clientResponse)
-             {
+             flatMap:^Either*(ClientResponse* clientResponse) {
                NSData* output = clientResponse.output;
                if (requiredNonEmpty && output.length == 0)
                {
@@ -186,8 +186,7 @@ typedef NSArray*(^ErrorHandlingBlock)(NSDictionary*);
             }]
            
            /// output type verification
-           flatMap:^Either *(id outputObject)
-           {
+           flatMap:^Either *(id outputObject) {
              Class classToCheck = nil;
              switch (requiredType)
              {
@@ -211,7 +210,6 @@ typedef NSArray*(^ErrorHandlingBlock)(NSDictionary*);
              }
              else
              {
-               
                /// check if there's any error
                Optional* optionalErrors = [[[Optional
                                              with:outputObject]
@@ -280,10 +278,9 @@ typedef NSArray*(^ErrorHandlingBlock)(NSDictionary*);
 {
   return ^NSArray*(NSDictionary* outputDict) {
     id errorsObject = [outputDict objectForKey:key];
-    if (errorsObject == nil)
-    {
-      return nil;
-    }
+    
+    Guard(errorsObject != nil, { return nil; })
+    
     if ([errorsObject isKindOfClass:[NSDictionary class]])
     {
       return [(NSDictionary*)errorsObject
@@ -296,14 +293,12 @@ typedef NSArray*(^ErrorHandlingBlock)(NSDictionary*);
     }
     else if ([errorsObject isKindOfClass:[NSArray class]])
     {
-      return [(NSArray*)errorsObject map:^id(id object) {
-        return [ErrorPair withName:object message:@""];
-      }];
+      return [(NSArray*)errorsObject
+              map:^id(id object) {
+                return [ErrorPair withName:object message:@""];
+              }];
     }
-    else
-    {
-      return nil;
-    }
+    return nil;
   };
 }
 

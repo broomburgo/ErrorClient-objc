@@ -2,181 +2,275 @@
 #import <Tools/Tools.h>
 #import <Tools/Future_internal.h>
 
+#pragma mark - QueryStringPair
+
 @interface QueryStringPair : NSObject
 
 @property (copy, nonatomic) NSString* field;
 @property (copy, nonatomic) NSString* value;
 
-+ (QueryStringPair*)withField:(NSString*)field value:(NSString*)value;
-- (NSString *)URLEncodedStringValueWithEncoding:(NSStringEncoding)stringEncoding;
++ (QueryStringPair*)withField:(NSString*)field
+                        value:(NSString*)value;
+- (NSString*)URLEncodedStringValueWithEncoding:(NSStringEncoding)stringEncoding;
++ (NSArray*)pairsWithKey:(NSString*)key value:(id)value;
+
+@end
+
+@protocol QueryStringPairable <NSObject>
+
+- (NSArray* _Nonnull)pairsWithKey:(NSString* _Nonnull)key;
+
+@end
+
+@interface NSDictionary (QueryStringPair) <QueryStringPairable>
+
+@end
+
+@implementation NSDictionary (QueryStringPair)
+
+- (NSArray*)pairsWithKey:(NSString*)key
+{
+  NSMutableArray* m_components = [NSMutableArray array];
+  [self enumerateKeysAndObjectsUsingBlock:^(id nestedKey, id nestedValue, BOOL *stop) {
+    [m_components addObjectsFromArray:[QueryStringPair
+                                       pairsWithKey:key ? [NSString stringWithFormat:@"%@[%@]", key, nestedKey] : nestedKey
+                                       value:nestedValue]];
+  }];
+  return [NSArray arrayWithArray:m_components];
+}
+
+@end
+
+@interface NSArray (QueryStringPair) <QueryStringPairable>
+
+@end
+
+@implementation NSArray (QueryStringPair)
+
+- (NSArray*)pairsWithKey:(NSString*)key
+{
+  NSMutableArray* m_components = [NSMutableArray array];
+  [self enumerateObjectsUsingBlock:^(id nestedValue, NSUInteger idx, BOOL *stop) {
+    [m_components addObjectsFromArray:[QueryStringPair
+                                       pairsWithKey:[NSString stringWithFormat:@"%@[]", key]
+                                       value:nestedValue]];
+  }];
+  return [NSArray arrayWithArray:m_components];
+}
+
+@end
+
+@interface NSString (QueryStringPair) <QueryStringPairable>
+
+@end
+
+@implementation NSString (QueryStringPair)
+
+- (NSArray*)pairsWithKey:(NSString*)key
+{
+  return [[NSArray array]
+          optional:[QueryStringPair
+                    withField:key
+                    value:self]];
+}
 
 @end
 
 @implementation QueryStringPair
 
-+ (QueryStringPair*)withField:(NSString*)field value:(NSString*)value {
-    QueryStringPair* pair = [QueryStringPair new];
-    pair.field = field;
-    pair.value = value;
-    return pair;
++ (QueryStringPair*)withField:(NSString*)field value:(NSString*)value
+{
+  QueryStringPair* pair = [QueryStringPair new];
+  pair.field = field;
+  pair.value = value;
+  return pair;
 }
 
-+ (NSArray*)pairsWithKey:(NSString*)key value:(id)value {
-    NSMutableArray* m_queryStringComponents = [NSMutableArray array];
-    if([value isKindOfClass:[NSDictionary class]]) {
-        [value enumerateKeysAndObjectsUsingBlock:^(id nestedKey, id nestedValue, BOOL *stop) {
-            [m_queryStringComponents addObjectsFromArray:[QueryStringPair pairsWithKey:key ? [NSString stringWithFormat:@"%@[%@]", key, nestedKey] : nestedKey
-                                                                                 value:nestedValue]];
-        }];
-    }
-    else if([value isKindOfClass:[NSArray class]]) {
-        [value enumerateObjectsUsingBlock:^(id nestedValue, NSUInteger idx, BOOL *stop) {
-            [m_queryStringComponents addObjectsFromArray:[QueryStringPair pairsWithKey:[NSString stringWithFormat:@"%@[]", key]
-                                                                                 value:nestedValue]];
-        }];
-    }
-    else if([value isKindOfClass:[NSString class]]) {
-        [m_queryStringComponents addObject:[QueryStringPair withField:key
-                                                                value:value]];
-    }
-    else {
-        [m_queryStringComponents addObject:[QueryStringPair withField:key
-                                                                value:[value description]]];
-    }
-    return [NSArray arrayWithArray:m_queryStringComponents];
++ (NSArray*)pairsWithKey:(NSString*)key value:(id)value
+{
+  NSMutableArray* m_queryStringComponents = [NSMutableArray array];
+  if ([value respondsToSelector:@selector(pairsWithKey:)])
+  {
+    [m_queryStringComponents addObjectsFromArray:[value pairsWithKey:key]];
+  }
+  else
+  {
+    [m_queryStringComponents addObject:[QueryStringPair
+                                        withField:key
+                                        value:[value description]]];
+  }
+  return [NSArray arrayWithArray:m_queryStringComponents];
 }
 
-- (NSString *)URLEncodedStringValueWithEncoding:(NSStringEncoding)stringEncoding {
-    return [NSString stringWithFormat:@"%@=%@",
-            [QueryStringPair percentEscapedQueryStringPairMemberFromString:self.field withEncoding:stringEncoding],
-            [QueryStringPair percentEscapedQueryStringPairMemberFromString:self.value withEncoding:stringEncoding]];
+- (NSString *)URLEncodedStringValueWithEncoding:(NSStringEncoding)stringEncoding
+{
+  return [NSString stringWithFormat:@"%@=%@",
+          [QueryStringPair
+           percentEscapedQueryStringPairMemberFromString:self.field
+           withEncoding:stringEncoding],
+          [QueryStringPair
+           percentEscapedQueryStringPairMemberFromString:self.value
+           withEncoding:stringEncoding]];
 }
 
-+ (NSString*)percentEscapedQueryStringPairMemberFromString:(NSString*)string withEncoding:(NSStringEncoding)encoding {
-    static NSString * const kAFLegalCharactersToBeEscaped = @":/.?&=;+!@$()~";
-    return (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)string, NULL, (CFStringRef)kAFLegalCharactersToBeEscaped, CFStringConvertNSStringEncodingToEncoding(encoding)));
++ (NSString*)percentEscapedQueryStringPairMemberFromString:(NSString*)string
+                                              withEncoding:(NSStringEncoding)encoding
+{
+  static NSString* const kAFLegalCharactersToBeEscaped = @":/.?&=;+!@$()~";
+  return (NSString*)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)string, NULL, (CFStringRef)kAFLegalCharactersToBeEscaped, CFStringConvertNSStringEncodingToEncoding(encoding)));
 }
 
 @end
 
+#pragma mark - ClientResponse
+
 @interface ClientResponse ()
 
-@property (copy, nonatomic) NSHTTPURLResponse* __nonnull HTTPResponse;
-@property (copy, nonatomic) NSData* __nonnull output;
+@property (copy, nonatomic) NSHTTPURLResponse* HTTPResponse;
+@property (copy, nonatomic) NSData* output;
 
 @end
 
 @implementation ClientResponse
 
-+ (ClientResponse* __nonnull)withHTTPResponse:(NSHTTPURLResponse* __nonnull)HTTPResponse output:(NSData* __nonnull)output {
-    ClientResponse* response = [ClientResponse new];
-    response.HTTPResponse = HTTPResponse;
-    response.output = output;
-    return response;
++ (ClientResponse*)withHTTPResponse:(NSHTTPURLResponse*)HTTPResponse output:(NSData*)output
+{
+  ClientResponse* response = [ClientResponse new];
+  response.HTTPResponse = HTTPResponse;
+  response.output = output;
+  return response;
 }
 
-- (instancetype)copyWithZone:(NSZone *)zone {
-    return self;
+- (instancetype)copyWithZone:(NSZone *)zone
+{
+  return self;
 }
 
 @end
 
+#pragma mark - ClientError
+
 @interface ClientError ()
 
 @property (nonatomic) NSInteger statusCode;
-@property (copy, nonatomic) NSString* __nullable urlString;
-@property (copy, nonatomic) NSDictionary* __nullable headers;
-@property (copy, nonatomic) NSString* __nullable outputString;
-@property (copy, nonatomic) NSDictionary* __nullable serverErrors;
-@property (copy, nonatomic) NSError* __nonnull networkError;
+@property (copy, nonatomic) NSString* urlString;
+@property (copy, nonatomic) NSDictionary* headers;
+@property (copy, nonatomic) NSString* outputString;
+@property (copy, nonatomic) NSDictionary* serverErrors;
+@property (copy, nonatomic) NSError* networkError;
 
 @end
 
 @implementation ClientError
 
-+ (ClientError*)withStatusCode:(NSInteger)statusCode urlString:(NSString*)urlString headers:(NSDictionary*)headers outputString:(NSString*)outputString serverErrors:(NSDictionary*)serverErrors networkError:(NSError*)networkError {
-    ClientError* error = [ClientError new];
-    error.statusCode = statusCode;
-    error.urlString = urlString;
-    error.headers = headers;
-    error.outputString = outputString;
-    error.serverErrors = serverErrors;
-    error.networkError = networkError;
-    return error;
++ (ClientError*)withStatusCode:(NSInteger)statusCode
+                     urlString:(NSString*)urlString
+                       headers:(NSDictionary*)headers
+                  outputString:(NSString*)outputString
+                  serverErrors:(NSDictionary*)serverErrors
+                  networkError:(NSError*)networkError
+{
+  ClientError* error = [ClientError new];
+  error.statusCode = statusCode;
+  error.urlString = urlString;
+  error.headers = headers;
+  error.outputString = outputString;
+  error.serverErrors = serverErrors;
+  error.networkError = networkError;
+  return error;
 }
 
-- (NSDictionary*)keyedDescription {
-    return [[[[[[[NSDictionary dictionary]
-                 key:@"url"
-                 optional:self.urlString]
-                key:@"status code"
-                optional:@(self.statusCode)]
-               key:@"headers"
-               optional:self.headers]
-              key:@"output"
-              optional:self.outputString]
-             key:@"server errors"
-             optional:self.serverErrors]
-            key:@"network error"
-            optional:self.networkError.localizedDescription];
+- (NSDictionary*)keyedDescription
+{
+  return [[[[[[[NSDictionary dictionary]
+               key:@"url"
+               optional:self.urlString]
+              key:@"status code"
+              optional:@(self.statusCode)]
+             key:@"headers"
+             optional:self.headers]
+            key:@"output"
+            optional:self.outputString]
+           key:@"server errors"
+           optional:self.serverErrors]
+          key:@"network error"
+          optional:self.networkError.localizedDescription];
 }
 
-- (NSString*)description {
-    return [NSString stringWithFormat:@"url: %@\nstatus code: %d\nheaders: %@\noutput: %@\nserver errors: %@\nnetwork error: %@",
-            self.urlString,
-            (int)self.statusCode,
-            self.headers,
-            self.outputString,
-            self.serverErrors,
-            self.networkError.localizedDescription];
+- (NSString*)description
+{
+  return [NSString stringWithFormat:@"url: %@\nstatus code: %d\nheaders: %@\noutput: %@\nserver errors: %@\nnetwork error: %@",
+          self.urlString,
+          (int)self.statusCode,
+          self.headers,
+          self.outputString,
+          self.serverErrors,
+          self.networkError.localizedDescription];
 }
 
-- (instancetype)copyWithZone:(NSZone *)zone {
-    return self;
+- (instancetype)copyWithZone:(NSZone *)zone
+{
+  return self;
 }
 
 @end
 
+#pragma mark - RequestParameterEncoding
+
 @interface RequestParameterEncoding ()
 
 @property (nonatomic) RequestParameterEncodingType type;
-@property (copy, nonatomic) NSString* __nonnull(^ __nullable customEncodingBlock)(NSDictionary* __nonnull);
+@property (copy, nonatomic) NSString*(^ customEncodingBlock)(NSDictionary*);
 
 @end
 
 @implementation RequestParameterEncoding
 
-+ (RequestParameterEncoding* __nonnull)withType:(RequestParameterEncodingType)type customWithEncodingBlock:(NSString* __nonnull(^ __nullable)(NSDictionary* __nonnull))customEncodingBlock {
-    RequestParameterEncoding* parameterEncoding = [RequestParameterEncoding new];
-    parameterEncoding.type = type;
-    parameterEncoding.customEncodingBlock = customEncodingBlock;
-    return parameterEncoding;
++ (RequestParameterEncoding*)withType:(RequestParameterEncodingType)type
+              customWithEncodingBlock:(NSString*(^)(NSDictionary*))customEncodingBlock
+{
+  RequestParameterEncoding* parameterEncoding = [RequestParameterEncoding new];
+  parameterEncoding.type = type;
+  parameterEncoding.customEncodingBlock = customEncodingBlock;
+  return parameterEncoding;
 }
 
-+ (RequestParameterEncoding* __nonnull)JSON {
-    return [RequestParameterEncoding withType:RequestParameterEncodingTypeJSON customWithEncodingBlock:nil];
++ (RequestParameterEncoding*)JSON
+{
+  return [RequestParameterEncoding
+          withType:RequestParameterEncodingTypeJSON
+          customWithEncodingBlock:nil];
 }
 
-+ (RequestParameterEncoding* __nonnull)form {
-    return [RequestParameterEncoding withType:RequestParameterEncodingTypeForm customWithEncodingBlock:nil];
++ (RequestParameterEncoding*)form
+{
+  return [RequestParameterEncoding
+          withType:RequestParameterEncodingTypeForm
+          customWithEncodingBlock:nil];
 }
 
-+ (RequestParameterEncoding* __nonnull)customWithEncodingBlock:(NSString* __nonnull(^ __nonnull)(NSDictionary* __nonnull))customEncodingBlock {
-    return [RequestParameterEncoding withType:RequestParameterEncodingTypeCustom customWithEncodingBlock:customEncodingBlock];
++ (RequestParameterEncoding*)customWithEncodingBlock:(NSString*(^)(NSDictionary*))customEncodingBlock
+{
+  return [RequestParameterEncoding
+          withType:RequestParameterEncodingTypeCustom
+          customWithEncodingBlock:customEncodingBlock];
 }
 
-- (instancetype)copyWithZone:(NSZone *)zone {
-    return self;
+- (instancetype)copyWithZone:(NSZone *)zone
+{
+  return self;
 }
 
 @end
+
+#pragma mark - GenericClient
 
 @interface GenericClient () <NSURLConnectionDataDelegate>
 
 @property (copy, nonatomic) NSString* urlString;
 @property (copy, nonatomic) RequestParameterEncoding* parameterEncoding;
 @property (copy, nonatomic) NSDictionary* customHeaders;
-@property NSMutableData* m_dataBucket;
+@property (nonatomic) NSMutableData* m_dataBucket;
 @property (nonatomic) Future* currentFuture;
 @property (nonatomic) NSURLConnection* currentConnection;
 @property (nonatomic) NSHTTPURLResponse* currentResponse;
@@ -185,135 +279,183 @@
 
 @implementation GenericClient
 
-+ (GenericClient*)withURLString:(NSString* __nonnull)urlString {
-    return [GenericClient withURLString:urlString parameterEncoding:[RequestParameterEncoding JSON] customHeaders:nil];
++ (GenericClient*)withURLString:(NSString*)urlString
+{
+  return [GenericClient
+          withURLString:urlString
+          parameterEncoding:[RequestParameterEncoding JSON]
+          customHeaders:nil];
 }
 
-+ (GenericClient*)withURLString:(NSString* __nonnull)urlString parameterEncoding:(RequestParameterEncoding* __nonnull)parameterEncoding  {
-    return [GenericClient withURLString:urlString parameterEncoding:parameterEncoding customHeaders:nil];
++ (GenericClient*)withURLString:(NSString*)urlString
+              parameterEncoding:(RequestParameterEncoding*)parameterEncoding
+{
+  return [GenericClient
+          withURLString:urlString
+          parameterEncoding:parameterEncoding
+          customHeaders:nil];
 }
 
-+ (GenericClient*)withURLString:(NSString*__nonnull)urlString parameterEncoding:(RequestParameterEncoding* __nonnull)parameterEncoding customHeaders:(NSDictionary* __nullable)customHeaders {
-    GenericClient* client = [GenericClient new];
-    client.urlString = urlString;
-    client.parameterEncoding = parameterEncoding;
-    client.customHeaders = customHeaders;
-    return client;
++ (GenericClient*)withURLString:(NSString*__nonnull)urlString parameterEncoding:(RequestParameterEncoding*)parameterEncoding customHeaders:(NSDictionary*)customHeaders
+{
+  GenericClient* client = [GenericClient new];
+  client.urlString = urlString;
+  client.parameterEncoding = parameterEncoding;
+  client.customHeaders = customHeaders;
+  return client;
 }
 
-- (void)clean {
-    self.currentFuture = nil;
-    self.m_dataBucket = nil;
-    self.currentConnection = nil;
-    self.currentResponse = nil;
+- (void)clean
+{
+  self.currentFuture = nil;
+  self.m_dataBucket = nil;
+  self.currentConnection = nil;
+  self.currentResponse = nil;
 }
 
-- (Future*)getRequestWithParameters:(NSDictionary * __nullable)parameters {
-    return [self HTTPRequestWithMethod:@"GET" parameters:parameters];
+- (Future*)getRequestWithParameters:(NSDictionary *)parameters
+{
+  return [self
+          HTTPRequestWithMethod:@"GET"
+          parameters:parameters];
 }
 
-- (Future*)postRequestWithParameters:(NSDictionary * __nullable)parameters {
-    return [self HTTPRequestWithMethod:@"POST" parameters:parameters];
+- (Future*)postRequestWithParameters:(NSDictionary *)parameters
+{
+  return [self
+          HTTPRequestWithMethod:@"POST"
+          parameters:parameters];
 }
 
-- (Future*)HTTPRequestWithMethod:(NSString* __nonnull)method parameters:(NSDictionary* __nullable)parameters {
-    if (self.currentConnection != nil) {
-        [self.currentConnection cancel];
-    }
+- (Future*)HTTPRequestWithMethod:(NSString*)method parameters:(NSDictionary*)parameters
+{
+  [self.currentConnection cancel];
+  
+  NSString* urlString = [self.urlString
+                         stringByAppendingString:[self
+                                                  queryStringForMethod:method
+                                                  parameters:parameters]];
+  NSString* parametersString = [self
+                                parametersStringForMethod:method
+                                parameters:parameters];
+  
+  NSMutableURLRequest* m_request = [[NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]]
+                                    setup:^NSMutableURLRequest*(NSMutableURLRequest* m_request) {
+                                      m_request.HTTPMethod = method;
+                                      m_request.HTTPBody = [[[Optional with:parametersString]
+                                                             flatMap:^Optional*(NSString* parametersString) {
+                                                               return [Optional
+                                                                       with:[parametersString
+                                                                             dataUsingEncoding:NSUTF8StringEncoding]];
+                                                             }]
+                                                            get];
+                                      [self setupMutableRequestHeaders:m_request];
+                                      return m_request;
+                                    }];
     
-    NSString* urlString = self.urlString;
-    NSString* parametersString = parameters != nil ? [self parametersStringWithParameters:parameters] : nil;
-    
-    if (parametersString.length > 0 && [method isEqualToString:@"GET"]) {
-        urlString = [urlString stringByAppendingFormat:@"?%@", parametersString];
-    }
-    
-    NSMutableURLRequest* m_request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]];
-    m_request.HTTPMethod = method;
-    
-    if (parametersString.length > 0 && [method isEqualToString:@"POST"]) {
-        m_request.HTTPBody = [parametersString dataUsingEncoding:NSUTF8StringEncoding];
-    }
-    
-    NSString *charset = (NSString *)CFStringConvertEncodingToIANACharSetName(CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding));
-    switch (self.parameterEncoding.type) {
-        case RequestParameterEncodingTypeJSON:
-            [m_request setValue:[NSString stringWithFormat:@"application/json; charset=%@", charset] forHTTPHeaderField:@"Content-Type"];
-            break;
-        case RequestParameterEncodingTypeForm:
-            [m_request setValue:[NSString stringWithFormat:@"application/x-www-form-urlencoded; charset=%@", charset] forHTTPHeaderField:@"Content-Type"];
-            break;
-        default:
-            break;
-    }
-    
-    if (self.customHeaders) {
-        [self.customHeaders enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-            [m_request setValue:obj forHTTPHeaderField:key];
-        }];
-    }
-    
-    self.currentFuture = [Future new];
-    self.m_dataBucket = [NSMutableData new];
-    self.currentConnection = [NSURLConnection connectionWithRequest:m_request delegate:self];
-    [self.currentConnection start];
-    
-    return self.currentFuture;
-}
-
-- (NSString* __nullable)parametersStringWithParameters:(NSDictionary* __nonnull)parameters {
-    if (parameters.count == 0) {
-        return nil;
-    }
-    switch (self.parameterEncoding.type) {
-        case RequestParameterEncodingTypeForm: {
-            return [GenericClient queryStringFromDict:parameters];
-            break;
-        }
-        case RequestParameterEncodingTypeJSON: {
-            return [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil] encoding:NSUTF8StringEncoding];
-            break;
-        }
-        case RequestParameterEncodingTypeCustom: {
-            if (self.parameterEncoding.customEncodingBlock) {
-                return self.parameterEncoding.customEncodingBlock(parameters);
-            }
-            else {
-                return nil;
-            }
-            break;
-        }
-        default:
-            return nil;
-            break;
-    }
+  self.currentFuture = [Future new];
+  self.m_dataBucket = [NSMutableData new];
+  self.currentConnection = [NSURLConnection connectionWithRequest:m_request delegate:self];
+  [self.currentConnection start];
+  
+  return self.currentFuture;
 }
 
 #pragma mark - utility
 
-+ (NSString* __nonnull)queryStringFromDict:(NSDictionary* __nonnull)dict {
-    NSMutableArray *mutablePairs = [NSMutableArray array];
-    for (QueryStringPair* pair in [QueryStringPair pairsWithKey:nil value:dict]) {
-        [mutablePairs addObject:[pair URLEncodedStringValueWithEncoding:NSUTF8StringEncoding]];
-    }
-    return [mutablePairs componentsJoinedByString:@"&"];
+- (NSString* _Nonnull)queryStringForMethod:(NSString* _Nonnull)method
+                                parameters:(NSDictionary* _Nullable)parameters
+{
+  Guard([method isEqualToString:@"GET"] && parameters.count > 0, { return @""; })
+  return [@"?" stringByAppendingString:[GenericClient queryStringFromDict:parameters]];
 }
 
-+ (NSDictionary*)basicAuthorizationHeaderWithUsername:(NSString*)username password:(NSString*)password {
+- (NSString* _Nullable)parametersStringForMethod:(NSString* _Nonnull)method
+                                      parameters:(NSDictionary*)parameters
+{
+  Guard([method isEqualToString:@"POST"] && parameters.count > 0, { return nil; })
+  
+  switch (self.parameterEncoding.type)
+  {
+    case RequestParameterEncodingTypeForm:
+    {
+      return [GenericClient queryStringFromDict:parameters];
+      break;
+    }
+    case RequestParameterEncodingTypeJSON:
+    {
+      return [[NSString alloc]
+              initWithData:[NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil]
+              encoding:NSUTF8StringEncoding];
+      break;
+    }
+    case RequestParameterEncodingTypeCustom:
+    {
+      Guard(self.parameterEncoding.customEncodingBlock != nil, { return nil; })
+      
+      return self.parameterEncoding.customEncodingBlock(parameters);
+      break;
+    }
+    default:
+      return nil;
+      break;
+  }
+}
+
+- (NSMutableURLRequest* _Nonnull)setupMutableRequestHeaders:(NSMutableURLRequest* _Nonnull)m_request
+{
+  NSString *charset = (NSString *)CFStringConvertEncodingToIANACharSetName(CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding));
+  
+  switch (self.parameterEncoding.type)
+  {
+    case RequestParameterEncodingTypeJSON:
+      [m_request setValue:[NSString stringWithFormat:@"application/json; charset=%@", charset] forHTTPHeaderField:@"Content-Type"];
+      break;
+    case RequestParameterEncodingTypeForm:
+      [m_request setValue:[NSString stringWithFormat:@"application/x-www-form-urlencoded; charset=%@", charset] forHTTPHeaderField:@"Content-Type"];
+      break;
+    default:
+      break;
+  }
+  
+  [self.customHeaders enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+    [m_request setValue:obj forHTTPHeaderField:key];
+  }];
+  
+  return m_request;
+}
+
++ (NSString*)queryStringFromDict:(NSDictionary*)dict
+{
+  return [[[QueryStringPair
+            pairsWithKey:nil
+            value:dict]
+           map:^NSString*(QueryStringPair* pair) {
+             return [pair URLEncodedStringValueWithEncoding:NSUTF8StringEncoding];
+           }]
+          componentsJoinedByString:@"&"];
+}
+
++ (NSDictionary*)basicAuthorizationHeaderWithUsername:(NSString*)username password:(NSString*)password
+{
   return @{@"Authorization" : [NSString stringWithFormat:@"Basic %@", [self base64EncodedString:[NSString stringWithFormat:@"%@:%@", username, password]]]};
 }
 
-+ (NSString*)base64EncodedString:(NSString* __nonnull)string {
++ (NSString*)base64EncodedString:(NSString*)string
+{
   NSData *data = [NSData dataWithBytes:[string UTF8String] length:[string lengthOfBytesUsingEncoding:NSUTF8StringEncoding]];
   NSUInteger length = [data length];
   NSMutableData *mutableData = [NSMutableData dataWithLength:((length + 2) / 3) * 4];
   uint8_t *input = (uint8_t *)[data bytes];
   uint8_t *output = (uint8_t *)[mutableData mutableBytes];
-  for (NSUInteger i = 0; i < length; i += 3) {
+  for (NSUInteger i = 0; i < length; i += 3)
+  {
     NSUInteger value = 0;
-    for (NSUInteger j = i; j < (i + 3); j++) {
+    for (NSUInteger j = i; j < (i + 3); j++)
+    {
       value <<= 8;
-      if (j < length) {
+      if (j < length)
+      {
         value |= (0xFF & input[j]);
       }
     }
@@ -324,41 +466,54 @@
     output[idx + 2] = (i + 1) < length ? kAFBase64EncodingTable[(value >> 6)  & 0x3F] : '=';
     output[idx + 3] = (i + 2) < length ? kAFBase64EncodingTable[(value >> 0)  & 0x3F] : '=';
   }
-  return [[NSString alloc] initWithData:mutableData encoding:NSASCIIStringEncoding];
+  return [[NSString alloc]
+          initWithData:mutableData
+          encoding:NSASCIIStringEncoding];
 }
 
 #pragma mark - NSURLConnectionDataDelegate
 
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-    self.currentResponse = (NSHTTPURLResponse*)response;
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
+{
+  self.currentResponse = (NSHTTPURLResponse*)response;
 }
 
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
-    [self.m_dataBucket appendData:data];
+- (void)connection:(NSURLConnection *)connection
+    didReceiveData:(NSData *)data
+{
+  [self.m_dataBucket appendData:data];
 }
 
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    NSData* responseData = [self.m_dataBucket copy];
-    [self.currentFuture succeedWith:[ClientResponse withHTTPResponse:self.currentResponse output:responseData]];
-    [self clean];
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection
+{
+  NSData* responseData = [self.m_dataBucket copy];
+  [self.currentFuture
+   succeedWith:[ClientResponse
+                withHTTPResponse:self.currentResponse
+                output:responseData]];
+  [self clean];
 }
 
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-    [self.currentFuture failWith:[ClientError withStatusCode:self.currentResponse.statusCode
-                                                   urlString:connection.currentRequest.URL.absoluteString
-                                                     headers:self.currentResponse.allHeaderFields
-                                                outputString:[[[Optional
-                                                                with:[self.m_dataBucket copy]]
-                                                               flatMap:^Optional*(NSData* responseData) {
-                                                                   return [Optional
-                                                                           with:[[NSString alloc]
-                                                                                 initWithData:responseData
-                                                                                 encoding:NSUTF8StringEncoding]];
-                                                               }]
-                                                              get]
-                                                serverErrors:nil
-                                                networkError:error]];
-    [self clean];
+- (void)connection:(NSURLConnection *)connection
+  didFailWithError:(NSError *)error
+{
+  [self.currentFuture
+   failWith:[ClientError
+             withStatusCode:self.currentResponse.statusCode
+             urlString:connection.currentRequest.URL.absoluteString
+             headers:self.currentResponse.allHeaderFields
+             outputString:[[[Optional
+                             with:[self.m_dataBucket copy]]
+                            flatMap:^Optional*(NSData* responseData) {
+                              return [Optional
+                                      with:[[NSString alloc]
+                                            initWithData:responseData
+                                            encoding:NSUTF8StringEncoding]];
+                            }]
+                           get]
+             serverErrors:nil
+             networkError:error]];
+  [self clean];
 }
 
 @end

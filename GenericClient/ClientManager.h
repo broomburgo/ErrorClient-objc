@@ -1,11 +1,16 @@
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class GenericClient;
 
 @interface ClientManager : NSObject
 
-+ (ClientManager* __nonnull)shared;
-- (GenericClient* __nonnull)addClient:(GenericClient* __nonnull)client withKey:(NSString* __nonnull)key;
-- (GenericClient* __nullable)removeClientWithKey:(NSString* __nonnull)key;
++ (ClientManager*)shared;
+- (GenericClient*)addClient:(GenericClient*)client
+                    withKey:(NSString*)key;
+- (GenericClient* _Nullable)removeClientWithKey:(NSString*)key;
 
 @end
+
+NS_ASSUME_NONNULL_END
