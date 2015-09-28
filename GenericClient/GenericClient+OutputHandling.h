@@ -1,6 +1,9 @@
 #import "GenericClient.h"
 
-typedef NS_ENUM(NSInteger, OutputType) {
+NS_ASSUME_NONNULL_BEGIN
+
+typedef NS_ENUM(NSInteger, OutputType)
+{
     OutputTypeEmpty,
     OutputTypeDictionary,
     OutputTypeArray,
@@ -8,27 +11,30 @@ typedef NS_ENUM(NSInteger, OutputType) {
     OutputTypeNumber
 };
 
-@class Result;
+@class Either;
 
 @interface ErrorPair : NSObject <NSCopying>
 
-@property (copy, nonatomic, readonly) NSString* __nonnull name;
-@property (copy, nonatomic, readonly) NSString* __nullable message;
+@property (copy, nonatomic, readonly) NSString* name;
+@property (copy, nonatomic, readonly) NSString* message;
 
-+ (ErrorPair* __nonnull)withName:(NSString* __nonnull)name message:(NSString* __nullable)message;
++ (ErrorPair*)withName:(NSString*)name
+               message:(NSString*)message;
 
 @end
 
 @interface GenericClient (OutputHandling)
 
-/// output: Result<requiredOutputClass,ClientError>
+/// output: Either<requiredOutputClass,ClientError>
 /// errorHandlingBlock: NSArray<ErrorPair>
-+ (Result* __nullable)outputFromClientResponse:(ClientResponse* __nonnull)response
-                                  requiredType:(OutputType)requiredType
-                            errorHandlingBlock:(NSArray* __nullable(^ __nullable)(NSDictionary* __nonnull))errorHandlingBlock;
++ (Either* _Nullable)outputFromClientResponse:(ClientResponse*)response
+                                 requiredType:(OutputType)requiredType
+                           errorHandlingBlock:(NSArray* _Nullable(^ _Nullable)(NSDictionary*))errorHandlingBlock;
 
 
 /// output: NSArray<ErrorPair>
-+ (NSArray* __nullable(^ __nullable)(NSDictionary* __nonnull))standardErrorHandlingBlockWithKey:(NSString* __nonnull)key;
++ (NSArray* _Nullable(^ _Nullable)(NSDictionary*))standardErrorHandlingBlockWithKey:(NSString*)key;
 
 @end
+
+NS_ASSUME_NONNULL_END
