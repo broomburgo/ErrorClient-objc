@@ -340,7 +340,7 @@
                                 parameters:parameters];
   
   NSMutableURLRequest* m_request = [[NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]]
-                                    setup:^NSMutableURLRequest*(NSMutableURLRequest* m_request) {
+                                    setup:^(NSMutableURLRequest* m_request) {
                                       m_request.HTTPMethod = method;
                                       m_request.HTTPBody = [[[Optional with:parametersString]
                                                              flatMap:^Optional*(NSString* parametersString) {
@@ -350,7 +350,6 @@
                                                              }]
                                                             get];
                                       [self setupMutableRequestHeaders:m_request];
-                                      return m_request;
                                     }];
     
   self.currentFuture = [Future new];
