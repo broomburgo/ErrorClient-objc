@@ -13,11 +13,13 @@ typedef NS_ENUM(NSInteger, RequestParameterEncodingType)
 
 @interface ClientResponse : NSObject <NSCopying>
 
+@property (copy, nonatomic, readonly) NSURLRequest* originalRequest;
 @property (copy, nonatomic, readonly) NSHTTPURLResponse* HTTPResponse;
 @property (copy, nonatomic, readonly) NSData* output;
 
-+ (ClientResponse*)withHTTPResponse:(NSHTTPURLResponse*)HTTPResponse
-                             output:(NSData*)output;
++ (ClientResponse*)withOriginalRequest:(NSURLRequest*)originalRequest
+                          HTTPResponse:(NSHTTPURLResponse*)HTTPResponse
+                                output:(NSData*)output;
 
 @end
 
@@ -25,7 +27,8 @@ typedef NS_ENUM(NSInteger, RequestParameterEncodingType)
 
 @property (nonatomic, readonly) NSInteger statusCode;
 @property (copy, nonatomic, readonly, nullable) NSString* urlString;
-@property (copy, nonatomic, readonly, nullable) NSDictionary* headers;
+@property (copy, nonatomic, readonly, nullable) NSDictionary* requestHeaders;
+@property (copy, nonatomic, readonly, nullable) NSDictionary* responseHeaders;
 @property (copy, nonatomic, readonly, nullable) NSString* outputString;
 @property (copy, nonatomic, readonly, nullable) NSDictionary* serverErrors;
 @property (copy, nonatomic, readonly, nullable) NSError* networkError;
@@ -34,7 +37,8 @@ typedef NS_ENUM(NSInteger, RequestParameterEncodingType)
 
 + (ClientError*)withStatusCode:(NSInteger)statusCode
                      urlString:(NSString* _Nullable)urlString
-                       headers:(NSDictionary* _Nullable)headers
+                requestHeaders:(NSDictionary* _Nullable)requestHeaders
+               responseHeaders:(NSDictionary* _Nullable)responseHeaders
                   outputString:(NSString* _Nullable)outputString
                   serverErrors:(NSDictionary* _Nullable)serverErrors
                   networkError:(NSError* _Nullable)networkError;

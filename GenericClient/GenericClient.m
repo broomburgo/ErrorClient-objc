@@ -126,6 +126,7 @@
 
 @interface ClientResponse ()
 
+@property (copy, nonatomic) NSURLRequest* originalRequest;
 @property (copy, nonatomic) NSHTTPURLResponse* HTTPResponse;
 @property (copy, nonatomic) NSData* output;
 
@@ -133,9 +134,12 @@
 
 @implementation ClientResponse
 
-+ (ClientResponse*)withHTTPResponse:(NSHTTPURLResponse*)HTTPResponse output:(NSData*)output
++ (ClientResponse*)withOriginalRequest:(NSURLRequest*)originalRequest
+                          HTTPResponse:(NSHTTPURLResponse*)HTTPResponse
+                                output:(NSData*)output
 {
   ClientResponse* response = [ClientResponse new];
+  response.originalRequest = originalRequest;
   response.HTTPResponse = HTTPResponse;
   response.output = output;
   return response;
@@ -154,7 +158,8 @@
 
 @property (nonatomic) NSInteger statusCode;
 @property (copy, nonatomic) NSString* urlString;
-@property (copy, nonatomic) NSDictionary* headers;
+@property (copy, nonatomic) NSDictionary* requestHeaders;
+@property (copy, nonatomic) NSDictionary* responseHeaders;
 @property (copy, nonatomic) NSString* outputString;
 @property (copy, nonatomic) NSDictionary* serverErrors;
 @property (copy, nonatomic) NSError* networkError;
@@ -165,7 +170,8 @@
 
 + (ClientError*)withStatusCode:(NSInteger)statusCode
                      urlString:(NSString*)urlString
-                       headers:(NSDictionary*)headers
+                requestHeaders:(NSDictionary*)requestHeaders
+               responseHeaders:(NSDictionary*)responseHeaders
                   outputString:(NSString*)outputString
                   serverErrors:(NSDictionary*)serverErrors
                   networkError:(NSError*)networkError
@@ -173,7 +179,8 @@
   ClientError* error = [ClientError new];
   error.statusCode = statusCode;
   error.urlString = urlString;
-  error.headers = headers;
+  error.requestHeaders = requestHeaders;
+  error.responseHeaders = responseHeaders;
   error.outputString = outputString;
   error.serverErrors = serverErrors;
   error.networkError = networkError;
@@ -182,13 +189,15 @@
 
 - (NSDictionary*)keyedDescription
 {
-  return [[[[[[[NSDictionary dictionary]
-               key:@"url"
-               optional:self.urlString]
-              key:@"status code"
-              optional:@(self.statusCode)]
-             key:@"headers"
-             optional:self.headers]
+  return [[[[[[[[NSDictionary dictionary]
+                key:@"url"
+                optional:self.urlString]
+               key:@"status code"
+               optional:@(self.statusCode)]
+              key:@"request headers"
+              optional:self.requestHeaders]
+             key:@"response headers"
+             optional:self.responseHeaders]
             key:@"output"
             optional:self.outputString]
            key:@"server errors"
@@ -199,10 +208,11 @@
 
 - (NSString*)description
 {
-  return [NSString stringWithFormat:@"url: %@\nstatus code: %d\nheaders: %@\noutput: %@\nserver errors: %@\nnetwork error: %@",
+  return [NSString stringWithFormat:@"url: %@\nstatus code: %d\nrequest headers: %@\response headers: %@\noutput: %@\nserver errors: %@\nnetwork error: %@",
           self.urlString,
           (int)self.statusCode,
-          self.headers,
+          self.requestHeaders,
+          self.responseHeaders,
           self.outputString,
           self.serverErrors,
           self.networkError.localizedDescription];
@@ -488,7 +498,8 @@
   NSData* responseData = [self.m_dataBucket copy];
   [self.currentFuture
    succeedWith:[ClientResponse
-                withHTTPResponse:self.currentResponse
+                withOriginalRequest:connection.originalRequest
+                HTTPResponse:self.currentResponse
                 output:responseData]];
   [self clean];
 }
@@ -500,7 +511,8 @@
    failWith:[ClientError
              withStatusCode:self.currentResponse.statusCode
              urlString:connection.currentRequest.URL.absoluteString
-             headers:self.currentResponse.allHeaderFields
+             requestHeaders:connection.originalRequest.allHTTPHeaderFields
+             responseHeaders:self.currentResponse.allHeaderFields
              outputString:[[[Optional
                              with:[self.m_dataBucket copy]]
                             flatMap:^Optional*(NSData* responseData) {

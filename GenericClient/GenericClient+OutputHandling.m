@@ -105,7 +105,8 @@ typedef NSArray*(^ErrorHandlingBlock)(NSDictionary*);
                           leftWith:[ClientError
                                     withStatusCode:statusCode
                                     urlString:clientResponse.HTTPResponse.URL.absoluteString
-                                    headers:clientResponse.HTTPResponse.allHeaderFields
+                                    requestHeaders:clientResponse.originalRequest.allHTTPHeaderFields
+                                    responseHeaders:clientResponse.HTTPResponse.allHeaderFields
                                     outputString:[[[Optional
                                                     with:clientResponse.output]
                                                    flatMap:^Optional*(NSData* output) {
@@ -133,7 +134,8 @@ typedef NSArray*(^ErrorHandlingBlock)(NSDictionary*);
                          leftWith:[ClientError
                                    withStatusCode:clientResponse.HTTPResponse.statusCode
                                    urlString:clientResponse.HTTPResponse.URL.absoluteString
-                                   headers:clientResponse.HTTPResponse.allHeaderFields
+                                   requestHeaders:clientResponse.originalRequest.allHTTPHeaderFields
+                                   responseHeaders:clientResponse.HTTPResponse.allHeaderFields
                                    outputString:@""
                                    serverErrors:nil
                                    networkError:nil]];
@@ -174,7 +176,8 @@ typedef NSArray*(^ErrorHandlingBlock)(NSDictionary*);
                         leftWith:[ClientError
                                   withStatusCode:0
                                   urlString:response.HTTPResponse.URL.absoluteString
-                                  headers:nil
+                                  requestHeaders:response.originalRequest.allHTTPHeaderFields
+                                  responseHeaders:response.HTTPResponse.allHeaderFields
                                   outputString:[[NSString alloc] initWithData:output encoding:NSUTF8StringEncoding]
                                   serverErrors:nil
                                   networkError:jsonError]];
@@ -242,7 +245,8 @@ typedef NSArray*(^ErrorHandlingBlock)(NSDictionary*);
                        leftWith:[ClientError
                                  withStatusCode:response.HTTPResponse.statusCode
                                  urlString:response.HTTPResponse.URL.absoluteString
-                                 headers:response.HTTPResponse.allHeaderFields
+                                 requestHeaders:response.originalRequest.allHTTPHeaderFields
+                                 responseHeaders:response.HTTPResponse.allHeaderFields
                                  outputString:nil
                                  serverErrors:[[[NSDictionary dictionary]
                                                 key:@"type error"
@@ -263,7 +267,8 @@ typedef NSArray*(^ErrorHandlingBlock)(NSDictionary*);
                         leftWith:[ClientError
                                   withStatusCode:response.HTTPResponse.statusCode
                                   urlString:response.HTTPResponse.URL.absoluteString
-                                  headers:response.HTTPResponse.allHeaderFields
+                                  requestHeaders:response.originalRequest.allHTTPHeaderFields
+                                  responseHeaders:response.HTTPResponse.allHeaderFields
                                   outputString:nil
                                   serverErrors:outputErrors
                                   networkError:nil]];
