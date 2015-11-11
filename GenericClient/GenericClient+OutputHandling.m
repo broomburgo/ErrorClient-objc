@@ -50,9 +50,10 @@ typedef NSArray*(^ErrorHandlingBlock)(NSDictionary*);
 @implementation GenericClient (OutputHandling)
 
 /// Either<requiredOutputClass,ClientError>
-+ (Either*)outputFromClientResponse:(ClientResponse*)response
-                       requiredType:(OutputType)requiredType
-                 errorHandlingBlock:(NSArray*(^)(NSDictionary*))errorHandlingBlock
++ (Either*)outputFromClientResponse:(ClientResponse *)response
+               validHTTPStatusCodes:(NSArray *)validCodes
+                 requiredOutputType:(OutputType)requiredType
+                 errorHandlingBlock:(NSArray * _Nullable (^)(NSDictionary * _Nonnull))errorHandlingBlock
 {
   BOOL requiredNonEmpty = requiredType != OutputTypeEmpty;
   
@@ -75,7 +76,7 @@ typedef NSArray*(^ErrorHandlingBlock)(NSDictionary*);
               /// status code validation
               flatMap:^Either*(ClientResponse* clientResponse) {
                 NSInteger statusCode = clientResponse.HTTPResponse.statusCode;
-                if (statusCode < 200 || statusCode > 299)
+                if ([validCodes containsObject:@(statusCode)] == NO)
                 {
                   /// check if there's any error
                   Optional* optionalErrors = [[[[Optional
@@ -305,6 +306,14 @@ typedef NSArray*(^ErrorHandlingBlock)(NSDictionary*);
     }
     return nil;
   };
+}
+
++ (NSArray*)standardValidHTTPStatusCodes
+{
+  return [[[NSIndexSet
+            indexSetWithIndexesInRange:NSMakeRange(200, 100)]
+           mapToArray]
+          arrayByAddingObject:@304];
 }
 
 @end
