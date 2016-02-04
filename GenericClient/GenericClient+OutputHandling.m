@@ -53,24 +53,24 @@ typedef NSArray*(^ErrorHandlingBlock)(NSDictionary*);
 + (Either*)outputFromClientResponse:(ClientResponse *)response
                validHTTPStatusCodes:(NSArray *)validCodes
                  requiredOutputType:(OutputType)requiredType
-                 errorHandlingBlock:(NSArray * _Nullable (^)(NSDictionary * _Nonnull))errorHandlingBlock
+                 errorHandlingBlock:(id _Nullable (^)(NSDictionary * _Nonnull))errorHandlingBlock
 {
   BOOL requiredNonEmpty = requiredType != OutputTypeEmpty;
   
   /// errors validation for output dict
   NSDictionary* _Nullable(^errorsDictFromOutputDict)(NSDictionary* _Nonnull, ErrorHandlingBlock _Nullable) = ^NSDictionary*(NSDictionary* outputDict, ErrorHandlingBlock errorBlock) {
     Guard(errorBlock != nil, { return nil; })
-    
+
     NSArray* errors = errorBlock(outputDict);
-    
+
     Guard(errors.count > 0, { return nil; })
-    
+
     return [errors
             mapToDictionary:^NSDictionary* (ErrorPair* pair) {
               return pair.keyValuePair;
             }];
   };
-  
+
   return [[[[[[Either rightWith:response]
               
               /// status code validation
@@ -277,6 +277,23 @@ typedef NSArray*(^ErrorHandlingBlock)(NSDictionary*);
             }
             return [Either rightWith:outputObject];
           }];
+}
+
++ (NSArray*(^)(NSDictionary*))singleErrorHandlingBlockWithErrorKey:(NSString *)key messageKey:(NSString *)messageKey
+{
+  return ^NSArray*(NSDictionary* outputDict) {
+    id errorsObject = [outputDict objectForKey:key];
+
+    GuardNil(errorsObject != nil)
+    GuardNil([errorsObject isKindOfClass:[NSDictionary class]])
+
+    id messageObject = [(NSDictionary*)errorsObject objectForKey:messageKey];
+
+    GuardNil(messageObject != nil)
+    GuardNil([messageObject isKindOfClass:[NSString class]])
+
+    return @[[ErrorPair withName:messageObject message:messageObject]];
+  };
 }
 
 /// NSArray<ErrorPair>

@@ -30,8 +30,10 @@ typedef NS_ENUM(NSInteger, OutputType)
 + (Either* _Nullable)outputFromClientResponse:(ClientResponse*)response
                          validHTTPStatusCodes:(NSArray*)validCodes
                            requiredOutputType:(OutputType)requiredType
-                           errorHandlingBlock:(NSArray* _Nullable(^ _Nullable)(NSDictionary*))errorHandlingBlock;
+                           errorHandlingBlock:(id _Nullable(^ _Nullable)(NSDictionary*))errorHandlingBlock;
 
+/// output: NSArray<ErrorPair>
++ (NSArray*_Nullable(^ _Nullable)(NSDictionary*))singleErrorHandlingBlockWithErrorKey:(NSString*)key messageKey:(NSString*)messageKey;
 
 /// output: NSArray<ErrorPair>
 + (NSArray* _Nullable(^ _Nullable)(NSDictionary*))standardErrorHandlingBlockWithKey:(NSString*)key;
