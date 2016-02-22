@@ -275,6 +275,8 @@
 
 #pragma mark - GenericClient
 
+static BOOL GenericClientLogActive = NO;
+
 @interface GenericClient () <NSURLConnectionDataDelegate>
 
 @property (copy, nonatomic) NSString* urlString;
@@ -288,6 +290,10 @@
 @end
 
 @implementation GenericClient
+
++ (void)setLogActive:(BOOL)logActive {
+  GenericClientLogActive = logActive;
+}
 
 + (GenericClient*)withURLString:(NSString*)urlString
 {
@@ -340,7 +346,7 @@
 - (Future*)HTTPRequestWithMethod:(NSString*)method parameters:(NSDictionary*)parameters
 {
   [self.currentConnection cancel];
-  
+
   NSString* urlString = [self.urlString
                          stringByAppendingString:[self
                                                   queryStringForMethod:method
@@ -348,8 +354,11 @@
   NSString* parametersString = [self
                                 parametersStringForMethod:method
                                 parameters:parameters];
-  
-  NSMutableURLRequest* m_request = [[NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]]
+
+  NSMutableURLRequest* m_request = [[NSMutableURLRequest
+                                     requestWithURL:[NSURL URLWithString:urlString]
+                                     cachePolicy:NSURLRequestReloadIgnoringCacheData
+                                     timeoutInterval:60]
                                     setup:^(NSMutableURLRequest* m_request) {
                                       m_request.HTTPMethod = method;
                                       m_request.HTTPBody = [[[Optional with:parametersString]
@@ -361,12 +370,33 @@
                                                             get];
                                       [self setupMutableRequestHeaders:m_request];
                                     }];
-    
+
+  if (GenericClientLogActive) {
+    NSLog(@"%@ - will send request\n%@\n%@\nHeaders: %@\nBody: %@",
+          self,
+          m_request.URL,
+          m_request.HTTPMethod,
+          [[[[Optional with:m_request.allHTTPHeaderFields]
+             flatMap:^Optional*(NSDictionary* headers) {
+               return [Optional with:[NSJSONSerialization
+                                      dataWithJSONObject:headers
+                                      options:NSJSONWritingPrettyPrinted
+                                      error:nil]];
+             }]
+            flatMap:^Optional*(NSData* data) {
+              return [Optional with:[[NSString alloc]
+                                     initWithData:data
+                                     encoding:NSUTF8StringEncoding]];
+            }]
+           get],
+          [[NSString alloc] initWithData:m_request.HTTPBody encoding:NSUTF8StringEncoding]);
+  }
+
   self.currentFuture = [Future new];
   self.m_dataBucket = [NSMutableData new];
   self.currentConnection = [NSURLConnection connectionWithRequest:m_request delegate:self];
   [self.currentConnection start];
-  
+
   return self.currentFuture;
 }
 
@@ -383,7 +413,7 @@
                                       parameters:(NSDictionary*)parameters
 {
   Guard([method isEqualToString:@"POST"] && parameters.count > 0, { return nil; })
-  
+
   switch (self.parameterEncoding.type)
   {
     case RequestParameterEncodingTypeForm:
@@ -401,7 +431,7 @@
     case RequestParameterEncodingTypeCustom:
     {
       Guard(self.parameterEncoding.customEncodingBlock != nil, { return nil; })
-      
+
       return self.parameterEncoding.customEncodingBlock(parameters);
       break;
     }
@@ -413,8 +443,11 @@
 
 - (NSMutableURLRequest* _Nonnull)setupMutableRequestHeaders:(NSMutableURLRequest* _Nonnull)m_request
 {
+  [m_request setValue:@"gzip, deflate" forHTTPHeaderField:@"Accept-Encoding"];
+  [m_request setValue:@"*/*" forHTTPHeaderField:@"Accept"];
+
   NSString *charset = (NSString *)CFStringConvertEncodingToIANACharSetName(CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding));
-  
+
   switch (self.parameterEncoding.type)
   {
     case RequestParameterEncodingTypeJSON:
@@ -426,11 +459,11 @@
     default:
       break;
   }
-  
+
   [self.customHeaders enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
     [m_request setValue:obj forHTTPHeaderField:key];
   }];
-  
+
   return m_request;
 }
 
@@ -484,6 +517,9 @@
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
+  if (GenericClientLogActive) {
+    NSLog(@"%@ - did receive response: %@", self, response);
+  }
   self.currentResponse = (NSHTTPURLResponse*)response;
 }
 
@@ -496,6 +532,13 @@
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
   NSData* responseData = [self.m_dataBucket copy];
+
+  if (GenericClientLogActive) {
+    NSLog(@"%@ - did load data: %@", self, [[NSString alloc]
+                                                          initWithData:responseData
+                                                          encoding:NSUTF8StringEncoding]);
+  }
+
   [self.currentFuture
    succeedWith:[ClientResponse
                 withOriginalRequest:connection.originalRequest
@@ -507,6 +550,10 @@
 - (void)connection:(NSURLConnection *)connection
   didFailWithError:(NSError *)error
 {
+  if (GenericClientLogActive) {
+    NSLog(@"%@ - did fail with error: %@", self, error);
+  }
+
   [self.currentFuture
    failWith:[ClientError
              withStatusCode:self.currentResponse.statusCode

@@ -6,9 +6,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSInteger, RequestParameterEncodingType)
 {
-    RequestParameterEncodingTypeJSON,
-    RequestParameterEncodingTypeForm,
-    RequestParameterEncodingTypeCustom
+  RequestParameterEncodingTypeJSON,
+  RequestParameterEncodingTypeForm,
+  RequestParameterEncodingTypeCustom
 };
 
 @interface ClientResponse : NSObject <NSCopying>
@@ -58,6 +58,8 @@ typedef NS_ENUM(NSInteger, RequestParameterEncodingType)
 @interface GenericClient : NSObject
 
 @property (copy, nonatomic, readonly) NSString* urlString;
+
++ (void)setLogActive:(BOOL)logActive;
 
 + (GenericClient*)withURLString:(NSString*)urlString;
 + (GenericClient*)withURLString:(NSString*)urlString
