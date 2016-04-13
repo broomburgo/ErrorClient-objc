@@ -208,7 +208,7 @@
 
 - (NSString*)description
 {
-  return [NSString stringWithFormat:@"url: %@\nstatus code: %d\nrequest headers: %@\response headers: %@\noutput: %@\nserver errors: %@\nnetwork error: %@",
+  return [NSString stringWithFormat:@"url: %@\nstatus code: %d\nrequest headers: %@\nresponse headers: %@\noutput: %@\nserver errors: %@\nnetwork error: %@",
           self.urlString,
           (int)self.statusCode,
           self.requestHeaders,
