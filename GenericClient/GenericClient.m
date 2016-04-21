@@ -187,6 +187,26 @@
   return error;
 }
 
++ (ClientError*)withResponse:(ClientResponse*)response
+                serverErrors:(NSDictionary*)serverErrors
+                networkError:(NSError*)networkError {
+  return [ClientError
+          withStatusCode:response.HTTPResponse.statusCode
+          urlString:response.HTTPResponse.URL.absoluteString
+          requestHeaders:response.originalRequest.allHTTPHeaderFields
+          responseHeaders:response.HTTPResponse.allHeaderFields
+          outputString:[[[Optional
+                          with:response.output]
+                         map:^NSString*(NSData* data){
+                           return [[NSString alloc]
+                                   initWithData:data
+                                   encoding:NSUTF8StringEncoding];
+                         }]
+                        get]
+          serverErrors:serverErrors
+          networkError:networkError];
+}
+
 - (NSDictionary*)keyedDescription
 {
   return [[[[[[[[NSDictionary dictionary]

@@ -43,6 +43,10 @@ typedef NS_ENUM(NSInteger, RequestParameterEncodingType)
                   serverErrors:(NSDictionary* _Nullable)serverErrors
                   networkError:(NSError* _Nullable)networkError;
 
++ (ClientError*)withResponse:(ClientResponse*)response
+                serverErrors:(NSDictionary* _Nullable)serverErrors
+                networkError:(NSError* _Nullable)networkError;
+
 @end
 
 @interface RequestParameterEncoding : NSObject <NSCopying>
