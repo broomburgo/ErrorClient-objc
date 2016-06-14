@@ -69,8 +69,9 @@ typedef NS_ENUM(NSInteger, RequestParameterEncodingType)
 + (GenericClient*)withURLString:(NSString*)urlString
               parameterEncoding:(RequestParameterEncoding*)parameterEncoding;
 + (GenericClient*)withURLString:(NSString*)urlStirng
-              parameterEncoding:(RequestParameterEncoding*)parameterEncoding
-                  customHeaders:(NSDictionary* _Nullable)customHeaders;
+			  parameterEncoding:(RequestParameterEncoding*)parameterEncoding
+				  customHeaders:(NSDictionary* _Nullable)customHeaders
+				   trustedHosts:(NSArray<NSString*>* _Nullable)trustedHosts;
 
 /// Future<ClientResponse,ClientError>
 - (Future*)getRequestWithParameters:(NSDictionary* _Nullable)parameters;
