@@ -47,4 +47,10 @@
   return client;
 }
 
+- (void(^)(BOOL, id _Nullable, id _Nullable))removeClientWithKeyOnCompletion:(NSString*)key {
+	return ^(BOOL s, id v, id e) {
+		[self removeClientWithKey:key];
+	};
+}
+
 @end

@@ -10,6 +10,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (GenericClient*)addClient:(GenericClient*)client
                     withKey:(NSString*)key;
 - (GenericClient* _Nullable)removeClientWithKey:(NSString*)key;
+- (void(^)(BOOL, id _Nullable, id _Nullable))removeClientWithKeyOnCompletion:(NSString*)key;
 
 @end
 
