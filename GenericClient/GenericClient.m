@@ -207,6 +207,28 @@
 			networkError:networkError];
 }
 
+- (NSError *)globalError {
+	NSError* basicError = [[Optional with:self.networkError] getOrElse:^NSError*{
+		return [NSError
+				errorWithDomain:@"ClientError"
+				code:self.statusCode
+				userInfo:nil];
+	}];
+	NSMutableDictionary* m_basicUserInfo = [[NSMutableDictionary dictionary]
+											optionalDict:basicError.userInfo];
+	[m_basicUserInfo key:@"status code" optional:@(self.statusCode)];
+	[m_basicUserInfo key:@"url string" optional:self.urlString];
+	[m_basicUserInfo key:@"request headers" optional:self.requestHeaders];
+	[m_basicUserInfo key:@"response headers" optional:self.responseHeaders];
+	[m_basicUserInfo key:@"output string" optional:self.outputString];
+	[m_basicUserInfo key:@"server errors" optional:self.serverErrors];
+
+	return [NSError
+			errorWithDomain:basicError.domain
+			code:basicError.code
+			userInfo:[NSDictionary dictionaryWithDictionary:m_basicUserInfo]];
+}
+
 - (NSDictionary*)keyedDescription
 {
 	return [[[[[[[[NSDictionary dictionary]

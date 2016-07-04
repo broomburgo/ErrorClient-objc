@@ -33,6 +33,8 @@ typedef NS_ENUM(NSInteger, RequestParameterEncodingType)
 @property (copy, nonatomic, readonly, nullable) NSDictionary* serverErrors;
 @property (copy, nonatomic, readonly, nullable) NSError* networkError;
 
+@property (nonatomic, readonly) NSError* globalError;
+
 @property (nonatomic, readonly) NSDictionary* keyedDescription;
 
 + (ClientError*)withStatusCode:(NSInteger)statusCode
