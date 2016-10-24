@@ -86,7 +86,7 @@
 	return pair;
 }
 
-+ (NSArray*)pairsWithKey:(NSString*)key value:(id)value
++ (NSArray*)pairsWithKey:(NSString* _Nonnull)key value:(id)value
 {
 	NSMutableArray* m_queryStringComponents = [NSMutableArray array];
 	if ([value respondsToSelector:@selector(pairsWithKey:)])
