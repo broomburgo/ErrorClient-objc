@@ -1,6 +1,5 @@
 #import "GenericClient.h"
 #import <Tools/Tools.h>
-#import <Tools/Future_internal.h>
 
 #pragma mark - QueryStringPair
 
